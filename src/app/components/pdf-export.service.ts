@@ -24,10 +24,6 @@ export class PdfExportService {
       compress: true, // Enable compression for smaller file size
     });
 
-    const pdfWidth = doc.internal.pageSize.getWidth();
-    const pdfHeight = doc.internal.pageSize.getHeight();
-    const margin = 0; // 10mm margin
-    const contentWidth = pdfWidth - margin * 2;
 
     // 2. Use jsPDF's html method
     // This method is superior for searchable text compared to canvas-only approaches
@@ -39,7 +35,7 @@ export class PdfExportService {
       windowWidth: element?.offsetWidth, // Use original element width for calculation
       autoPaging: 'text', // Smart paging to avoid clipping text lines
       html2canvas: {
-        scale: 0.2645, // Convert px to mm (roughly)
+        scale: 0.2645833333, // Convert px to mm (roughly)
         useCORS: true,
         logging: false,
         letterRendering: true,
