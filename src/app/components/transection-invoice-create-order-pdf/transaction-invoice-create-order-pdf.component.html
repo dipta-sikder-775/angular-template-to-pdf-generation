@@ -1,0 +1,108 @@
+<div
+    #transactionPDFInvoiceContainer
+    style="
+        width: 210mm;
+        min-height: 200mm;
+        padding: 40px;
+        margin: 0 auto;
+        background-color: white;
+        font-size: 11px;
+        color: #333;
+        box-sizing: border-box;
+        line-height: 1.4;
+        font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+    "
+>
+    <!-- HEADER ROW: Invoice title/details | QR | Barcode | Logo -->
+    <table
+        style="
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            table-layout: fixed;
+        "
+    >
+        <tr>
+            <transaction-pdf-invoice-summary [invoiceData]="invoiceData" />
+
+            <transaction-pdf-invoice-qr-code
+                [qrCodeUrl]="invoiceData.qrCodeUrl"
+            />
+
+            <transaction-pdf-invoice-barcode
+                [barcodeUrl]="invoiceData.barcodeUrl"
+            />
+
+            <transaction-pdf-invoice-business-logo
+                [businessLogoData]="invoiceData.businessLogoData"
+            />
+        </tr>
+    </table>
+
+    <!-- SUPPLIER / BILL TO / DELIVER TO -->
+    <table
+        style="
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            table-layout: fixed;
+        "
+    >
+        <tr>
+            <transaction-pdf-invoice-address-column
+                [title]="invoiceData.supplier.name"
+                [description]="invoiceData.supplier.address"
+                [isFirstItem]="true"
+                [isLastItem]="false"
+            />
+
+            <transaction-pdf-invoice-address-column
+                title="Bill To"
+                [name]="invoiceData.billTo.name"
+                [description]="invoiceData.billTo.address"
+                [isFirstItem]="false"
+                [isLastItem]="false"
+            />
+
+            <transaction-pdf-invoice-address-column
+                title="Deliver To"
+                [name]="invoiceData.deliverTo.name"
+                [description]="invoiceData.deliverTo.address"
+                [isFirstItem]="false"
+                [isLastItem]="true"
+            />
+        </tr>
+    </table>
+
+    <!-- ORDER TYPE & AMOUNT DUE -->
+    <transaction-pdf-invoice-order-type-amount
+        [orderType]="invoiceData.orderType"
+        [totalAmount]="invoiceData.totalAmount"
+    />
+
+    <transaction-pdf-invoice-items-table
+        [items]="invoiceData.items"
+        [stockType]="invoiceData.stockType"
+    />
+
+    <transaction-pdf-invoice-tax-and-totals
+        [taxSummary]="invoiceData.taxSummary"
+        [subtotal]="invoiceData.subtotal"
+        [totalVat]="invoiceData.totalVat"
+        [totalAmount]="invoiceData.totalAmount"
+    />
+
+    <transaction-pdf-invoice-instalment-breakdown
+        [installments]="invoiceData.installments"
+    />
+
+    <transaction-pdf-invoice-payment-details
+        [bank]="invoiceData.bank"
+        [footerNote]="invoiceData.footerNote"
+    />
+</div>
+
+<button (click)="download()">
+    <!-- {{ domToPdfService.isLoading ? "Generating PDF..." : "Download PDF" }} -->
+    "Download PDF"
+</button>

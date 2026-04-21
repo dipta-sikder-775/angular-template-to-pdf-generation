@@ -1,0 +1,49 @@
+@if (invoiceData) {
+    <td style="vertical-align: top; width: 45%" #TransactionPDFInvoiceSummary>
+        <h1
+            style="
+                font-size: 20px;
+                margin: 0 0 10px 0;
+                color: #000;
+                font-weight: 700;
+            "
+        >
+            Invoice
+        </h1>
+
+        @if (invoiceData.invNo) {
+            <p style="margin: 2px 0; font-size: 12px; display: flex; gap: 10px">
+                <strong style="width: 80px">INV No:</strong>
+                <span style="color: #333">{{ invoiceData.invNo }}</span>
+            </p>
+        }
+
+        @if (invoiceData.vatNumber) {
+            <p style="margin: 2px 0; font-size: 12px; display: flex; gap: 10px">
+                <strong style="width: 80px">Vat Number</strong>
+                {{ invoiceData.vatNumber }}
+            </p>
+        }
+
+        @if (invoiceData.issueDate) {
+            <p style="margin: 2px 0; font-size: 12px; display: flex; gap: 10px">
+                <strong style="width: 80px"> Issue Date</strong>
+                {{ invoiceData.issueDate }}
+            </p>
+        }
+
+        @if (invoiceData.deliveryDate) {
+            <p style="margin: 2px 0; font-size: 12px; display: flex; gap: 10px">
+                <strong style="width: 80px">Delivery Date</strong>
+                {{ invoiceData.deliveryDate }}
+            </p>
+        }
+
+        @if (invoiceData.vatNumber) {
+            <p style="margin: 2px 0; font-size: 12px; display: flex; gap: 10px">
+                <strong style="width: 80px">VAT Number</strong>
+                {{ invoiceData.vatNumber }}
+            </p>
+        }
+    </td>
+}
