@@ -3,12 +3,13 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
-    "strict": false,
+    "rootDir": "./src",
+    "strict": true,
+    "alwaysStrict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
@@ -18,12 +19,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"]
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "ignoreDeprecations": "6.0",
+    "incremental": true,
+    "skipLibCheck": true,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-
     "strictTemplates": true,
     "strictLiteralTypes": true,
     "strictAttributeTypes": true,
@@ -33,6 +39,8 @@
     "strictDomLocalRefTypes": true,
     "strictOutputEventTypes": false,
     "strictDomEventTypes": false,
-    "strictContextGenerics": true
+    "strictContextGenerics": true,
+    "strictStandalone": true,
+    "strictSafeNavigationTypes": true
   }
 }
