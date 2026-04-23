@@ -3,11 +3,11 @@ declare global {
     html2canvas: typeof import('html2canvas').default;
   }
 
-  type TjsPDFOptions = import('jspdf').jsPDFOptions;
-  type THTMLOptions = import('jspdf').HTMLOptions;
+  type TJsPDFsConfigOptions = import('jspdf').jsPDFOptions;
+  type TJsPDFsHTMLOptions = import('jspdf').HTMLOptions;
 }
 
-const defaultJsPDFConfig: TjsPDFOptions = {
+const defaultJsPDFConfig: TJsPDFsConfigOptions = {
   orientation: 'p',
   unit: 'mm',
   format: 'a4',
@@ -16,7 +16,7 @@ const defaultJsPDFConfig: TjsPDFOptions = {
   compress: true, // Enable compression for smaller file size
 };
 
-const defaultHtmlOptionConfig: THTMLOptions = {
+const defaultHtmlOptionConfig: TJsPDFsHTMLOptions = {
   windowWidth: undefined, // Use original element width for calculation
   width: 210, // Target width to scale content
   autoPaging: 'text', // Smart paging to avoid clipping text lines
@@ -57,7 +57,7 @@ function isSrcElement(src: TGenerateHtmlToPDFProps['src']): src is HTMLElement {
  */
 function getWindowWidth(
   src: TGenerateHtmlToPDFProps['src'],
-): THTMLOptions['windowWidth'] {
+): TJsPDFsHTMLOptions['windowWidth'] {
   if (isSrcElement(src)) {
     return src.offsetWidth;
   }
@@ -76,8 +76,8 @@ function getWindowWidth(
 type TGenerateHtmlToPDFProps = {
   src: string | HTMLElement;
   fileName?: string;
-  configureFormat?: TjsPDFOptions;
-  configureHtmlOption?: THTMLOptions;
+  configureFormat?: TJsPDFsConfigOptions;
+  configureHtmlOption?: TJsPDFsHTMLOptions;
 };
 
 export async function generateHtmlToPDF({
