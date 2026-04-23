@@ -16,10 +16,6 @@ const defaultJsPDFConfig: jsPDFOptions = {
 };
 
 const defaultHtmlOptionConfig: HTMLOptions = {
-  // callback: (pdf) => {
-  //   pdf.save(fileName);
-  // },
-  // windowWidth: element?.offsetWidth, // Use original element width for calculation
   windowWidth: undefined, // Use original element width for calculation
   width: 210, // Target width to scale content
   autoPaging: 'text', // Smart paging to avoid clipping text lines
