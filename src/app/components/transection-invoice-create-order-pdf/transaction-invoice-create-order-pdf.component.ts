@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { generateHtmlToPDF } from '../../../utils/pdf-export.util';
 import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
 import { TransactionPDFInvoiceAddressColumn } from './transaction-pdf-invoice-address-column/transaction-pdf-invoice-address-column.component';
 import { TransactionPDFInvoiceBarcode } from './transaction-pdf-invoice-barcode/transaction-pdf-invoice-barcode.component';
@@ -10,7 +11,6 @@ import { TransactionPDFInvoicePaymentDetails } from './transaction-pdf-invoice-p
 import { TransactionPDFInvoiceQrCode } from './transaction-pdf-invoice-qr-code/transaction-pdf-invoice-qr-code.component';
 import { TransactionPDFInvoiceSummary } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.component';
 import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax-and-totals/transaction-pdf-invoice-tax-and-totals.component';
-import { generateHtmlToPDF } from '../../../utils/pdf-export.util';
 
 @Component({
   selector: 'transaction-invoice-create-order-pdf',
@@ -34,18 +34,17 @@ export class TransactionInvoiceCreateOrderPDF {
   // transactionPDFInvoiceContainer?: ElementRef<HTMLElement>;
   @ViewChild('transactionPDFInvoiceContainer', { static: false })
   invoiceElement!: ElementRef;
-  loading = false;
+  isLoading = false;
 
   // constructor(private pdfService: PdfExportService) {}
 
   async download() {
-    this.loading = true;
-    // this.pdfService.generateInvoice(
-    //   this.invoiceElement.nativeElement,
-    //   'MyInvoice.pdf',
-    // );
-    await generateHtmlToPDF(this.invoiceElement.nativeElement, 'MyInvoice.pdf');
-    this.loading = false;
+    this.isLoading = true;
+    await generateHtmlToPDF({
+      src: this.invoiceElement.nativeElement,
+      fileName: 'MyInvoice.pdf',
+    });
+    this.isLoading = false;
   }
 
   invoiceData: TransactionInvoiceCreateOrderPdfData = {

@@ -1,42 +1,104 @@
+import type { HTMLOptions, jsPDFOptions } from 'jspdf';
+
 declare global {
   interface Window {
     html2canvas: typeof import('html2canvas').default;
   }
 }
 
-export async function generateHtmlToPDF(
-  element: HTMLElement,
-  fileName: string = 'generated_portable_document_format.pdf',
-): Promise<void> {
+const defaultJsPDFConfig: jsPDFOptions = {
+  orientation: 'p',
+  unit: 'mm',
+  format: 'a4',
+  putOnlyUsedFonts: true,
+  floatPrecision: 16, // High precision for text alignment,
+  compress: true, // Enable compression for smaller file size
+};
+
+const defaultHtmlOptionConfig: HTMLOptions = {
+  // callback: (pdf) => {
+  //   pdf.save(fileName);
+  // },
+  // windowWidth: element?.offsetWidth, // Use original element width for calculation
+  windowWidth: undefined, // Use original element width for calculation
+  width: 210, // Target width to scale content
+  autoPaging: 'text', // Smart paging to avoid clipping text lines
+  html2canvas: {
+    scale: 0.2645833333, // Convert px to mm (roughly)
+    useCORS: true,
+    logging: false,
+    letterRendering: true,
+    allowTaint: true,
+  },
+  margin: [10, 0, 10, 0],
+  y: -7,
+};
+
+/**
+ * This function determines whether the provided `src` value is a DOM element (`HTMLElement`).
+ *
+ * This function acts as a TypeScript type guard (type predicate), narrowing the input type to
+ * `HTMLElement` when it returns `true`.
+ *
+ * @param src - The source value to validate.
+ * @returns `true` if `src` is a non-null object representing an `HTMLElement`; otherwise `false`.
+ */
+function isSrcElement(src: TGenerateHtmlToPDFProps['src']): src is HTMLElement {
+  return typeof src === 'object' && src !== null && 'offsetWidth' in src;
+}
+
+/* Function to get the window width for HTML rendering */
+/**
+ * Derives the PDF rendering `windowWidth` value from a supported `src` input.
+ *
+ * - If `src` is a DOM element, its `offsetWidth` is returned.
+ * - If `src` is a string, the function attempts to convert it to a number.
+ * - If conversion fails or `src` is neither an element nor a string, `undefined` is returned.
+ *
+ * @param src - Source input used for HTML-to-PDF generation (element or width-like string).
+ * @returns The resolved window width as a number, or `undefined` when it cannot be determined.
+ */
+function getWindowWidth(
+  src: TGenerateHtmlToPDFProps['src'],
+): HTMLOptions['windowWidth'] {
+  if (isSrcElement(src)) {
+    return src.offsetWidth;
+  }
+
+  if (typeof src !== 'string') {
+    return;
+  }
+
+  const convertedNumberWindowWidth = Number(src);
+  if (Number.isNaN(convertedNumberWindowWidth)) {
+    return;
+  }
+  return convertedNumberWindowWidth;
+}
+
+type TGenerateHtmlToPDFProps = {
+  src: string | HTMLElement;
+  fileName?: string;
+  configureFormat?: jsPDFOptions;
+  configureHtmlOption?: HTMLOptions;
+};
+
+export async function generateHtmlToPDF({
+  src,
+  fileName = 'generated_portable_document_format.pdf',
+  configureFormat = defaultJsPDFConfig,
+  configureHtmlOption = defaultHtmlOptionConfig,
+}: TGenerateHtmlToPDFProps): Promise<void> {
   const html2canvas = (await import('html2canvas')).default;
   const jsPDF = (await import('jspdf')).default;
-  window.html2canvas = html2canvas;
+  window.html2canvas = html2canvas; // Make html2canvas globally available for jsPDF's html method, without this, jsPDF's html method fails to generate PDF correctly
 
-  // PDF Configuration
-  const doc = new jsPDF({
-    orientation: 'p',
-    unit: 'mm',
-    format: 'a4',
-    putOnlyUsedFonts: true,
-    floatPrecision: 16, // High precision for text alignment,
-    compress: true, // Enable compression for smaller file size
-  });
-
-  await doc.html(element, {
+  const jsPDFInstance = new jsPDF(configureFormat);
+  await jsPDFInstance.html(src, {
     callback: (pdf) => {
       pdf.save(fileName);
     },
-    width: 210, // Target width to scale content
-    windowWidth: element?.offsetWidth, // Use original element width for calculation
-    autoPaging: 'text', // Smart paging to avoid clipping text lines
-    html2canvas: {
-      scale: 0.2645833333, // Convert px to mm (roughly)
-      useCORS: true,
-      logging: false,
-      letterRendering: true,
-      allowTaint: true,
-    },
-    margin: [10, 0, 10, 0],
-    y: -7,
+    ...configureHtmlOption,
+    windowWidth: configureHtmlOption?.windowWidth ?? getWindowWidth(src), // Use original element width for calculation
   });
 }

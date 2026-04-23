@@ -98,7 +98,7 @@
   />
 </div>
 
-<button (click)="download()">
-  {{ loading ? "Generating PDF..." : "Download PDF" }}
+<button (click)="download()" [disabled]="isLoading">
+  {{ isLoading ? "Generating PDF..." : "Download PDF" }}
   <!-- "Download PDF" -->
 </button>
