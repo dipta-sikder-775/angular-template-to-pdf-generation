@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
+import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+
+declare global {
+  interface Window {
+    html2canvas: typeof html2canvas;
+  }
+}
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +19,11 @@ export class PdfExportService {
    */
   public async generateInvoice(
     element: HTMLElement,
-    fileName: string = 'invoice.pdf',
+    fileName: string = 'generated_portable_document_format.pdf',
   ): Promise<void> {
-    // 1. Setup PDF Configuration
+    window.html2canvas = html2canvas;
+
+    // PDF Configuration
     const doc = new jsPDF({
       orientation: 'p',
       unit: 'mm',
@@ -24,9 +33,6 @@ export class PdfExportService {
       compress: true, // Enable compression for smaller file size
     });
 
-
-    // 2. Use jsPDF's html method
-    // This method is superior for searchable text compared to canvas-only approaches
     await doc.html(element, {
       callback: (pdf) => {
         pdf.save(fileName);
@@ -42,7 +48,7 @@ export class PdfExportService {
         allowTaint: true,
       },
       margin: [10, 0, 10, 0],
-      y: -7
+      y: -7,
     });
   }
 }
