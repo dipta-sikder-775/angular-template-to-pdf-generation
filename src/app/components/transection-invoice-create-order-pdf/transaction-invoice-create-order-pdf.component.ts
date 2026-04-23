@@ -10,8 +10,7 @@ import { TransactionPDFInvoicePaymentDetails } from './transaction-pdf-invoice-p
 import { TransactionPDFInvoiceQrCode } from './transaction-pdf-invoice-qr-code/transaction-pdf-invoice-qr-code.component';
 import { TransactionPDFInvoiceSummary } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.component';
 import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax-and-totals/transaction-pdf-invoice-tax-and-totals.component';
-
-import { PdfExportService } from '../pdf-export.service';
+import { generateHtmlToPDF } from '../../../utils/pdf-export.util';
 
 @Component({
   selector: 'transaction-invoice-create-order-pdf',
@@ -35,15 +34,18 @@ export class TransactionInvoiceCreateOrderPDF {
   // transactionPDFInvoiceContainer?: ElementRef<HTMLElement>;
   @ViewChild('transactionPDFInvoiceContainer', { static: false })
   invoiceElement!: ElementRef;
+  loading = false;
 
-  constructor(private pdfService: PdfExportService) {}
+  // constructor(private pdfService: PdfExportService) {}
 
-  download() {
-            console.log("jbjidbisibiusdiuidbncisdbncijsbiuc: ", this.invoiceElement.nativeElement)
-    this.pdfService.generateInvoice(
-      this.invoiceElement.nativeElement,
-      'MyInvoice.pdf',
-    );
+  async download() {
+    this.loading = true;
+    // this.pdfService.generateInvoice(
+    //   this.invoiceElement.nativeElement,
+    //   'MyInvoice.pdf',
+    // );
+    await generateHtmlToPDF(this.invoiceElement.nativeElement, 'MyInvoice.pdf');
+    this.loading = false;
   }
 
   invoiceData: TransactionInvoiceCreateOrderPdfData = {
@@ -52,8 +54,10 @@ export class TransactionInvoiceCreateOrderPDF {
     issueDate: '03-04-2026',
     deliveryDate: '09-04-2026',
     vatNumber: '2313131',
-    qrCodeUrl: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
-    barcodeUrl: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    qrCodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    barcodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
     orderType: 'Delivery',
     businessLogoData: { businessName: 'business', businessId: 10 },
     stockType: 'kiosk',
