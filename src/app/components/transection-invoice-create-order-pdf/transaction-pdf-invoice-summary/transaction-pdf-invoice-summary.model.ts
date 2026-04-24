@@ -1,8 +1,9 @@
-export interface IInvoiceData {
-    invNo: string;
-    issueDate: string;
-    deliveryDate: string;
-    vatNumber: string;
-    qrCodeUrl: string;
-    barcodeUrl: string;
+export interface IInvoiceInfoItem {
+  label: string | number;
+  value: string | number;
+}
+
+export interface IInvoiceSummaryData {
+  title: string | number | null | undefined;
+  data: IInvoiceInfoItem[] | null | undefined;
 }

@@ -23,7 +23,9 @@
     "
   >
     <tr>
-      <transaction-pdf-invoice-summary [invoiceData]="invoiceData" />
+      <transaction-pdf-invoice-summary
+        [invoiceSummaryData]="invoiceData.invoiceSummaryData"
+      />
 
       <transaction-pdf-invoice-qr-code [qrCodeUrl]="invoiceData.qrCodeUrl" />
 
@@ -45,33 +47,39 @@
     "
   >
     <tr>
-      <transaction-pdf-invoice-address-column
-        [title]="invoiceData.supplier.name"
-        [description]="invoiceData.supplier.address"
-        [isFirstItem]="true"
-        [isLastItem]="false"
-      />
+      @if (invoiceData.supplier) {
+        <transaction-pdf-invoice-address-column
+          [title]="invoiceData.supplier.name"
+          [description]="invoiceData.supplier.address"
+          [isFirstItem]="true"
+          [isLastItem]="false"
+        />
+      }
 
-      <transaction-pdf-invoice-address-column
-        title="Bill To"
-        [name]="invoiceData.billTo.name"
-        [description]="invoiceData.billTo.address"
-        [isFirstItem]="false"
-        [isLastItem]="false"
-      />
+      @if (invoiceData.billTo) {
+        <transaction-pdf-invoice-address-column
+          title="Bill To"
+          [name]="invoiceData.billTo.name"
+          [description]="invoiceData.billTo.address"
+          [isFirstItem]="false"
+          [isLastItem]="false"
+        />
+      }
 
-      <transaction-pdf-invoice-address-column
-        title="Deliver To"
-        [name]="invoiceData.deliverTo.name"
-        [description]="invoiceData.deliverTo.address"
-        [isFirstItem]="false"
-        [isLastItem]="true"
-      />
+      @if (invoiceData.deliverTo) {
+        <transaction-pdf-invoice-address-column
+          title="Deliver To"
+          [name]="invoiceData.deliverTo.name"
+          [description]="invoiceData.deliverTo.address"
+          [isFirstItem]="false"
+          [isLastItem]="true"
+        />
+      }
     </tr>
   </table>
 
   <!-- ORDER TYPE & AMOUNT DUE -->
-  <transaction-pdf-invoice-order-type-amount
+  <transaction-pdf-invoice-order-details
     [orderType]="invoiceData.orderType"
     [totalAmount]="invoiceData.totalAmount"
   />

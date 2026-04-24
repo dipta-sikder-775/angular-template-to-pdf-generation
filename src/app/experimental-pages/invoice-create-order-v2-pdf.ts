@@ -7,8 +7,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   imports: [CommonModule],
   template: `
     <div
-      #invoiceRoot
-      style="width: 210mm; min-height: 290mm; padding: 40px; margin: 20px auto; background: white; font-size: 11px; color: #333; box-sizing: border-box; line-height: 1.4; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
+      #docRoot
+      style="width: 210mm; min-height: 290mm; padding: 40px; margin: 0 auto; background: white; font-size: 11px; color: #333; box-sizing: border-box; line-height: 1.4; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
     >
       <div
         style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; gap: 15px;"
@@ -271,11 +271,11 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   `,
 })
 export class InvoiceCreateOrderV2PDF {
-  @ViewChild('invoiceRoot', { static: false })
-  private invoiceRoot?: ElementRef<HTMLElement>;
+  @ViewChild('docRoot', { static: false })
+  private docRootRef?: ElementRef<HTMLElement>;
 
-  get invoiceElement(): HTMLElement | undefined {
-    return this.invoiceRoot?.nativeElement;
+  get docRootNativeElement(): HTMLElement | undefined {
+    return this.docRootRef?.nativeElement;
   }
 
   invoiceData = {
@@ -284,8 +284,10 @@ export class InvoiceCreateOrderV2PDF {
     issueDate: '03-04-2026',
     deliveryDate: '09-04-2026',
     vatNumber: '2313131',
-    qrCodeUrl: 'assets/img/logo/dummyQR.png',
-    barcodeUrl: 'assets/img/logo/dummyBARCODE.jpg',
+    qrCodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    barcodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
     orderType: 'Delivery',
     stockType: 'kiosk',
     supplier: {
@@ -319,7 +321,7 @@ export class InvoiceCreateOrderV2PDF {
     },
     items: [
       {
-        img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
+        img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
         description: 'k small (1 pack X 20 unit) (case)',
         sku: '000109343968305',
         quantity: 4,
@@ -328,7 +330,7 @@ export class InvoiceCreateOrderV2PDF {
         amount: '40.00',
       },
       {
-        img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
+        img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
         description: 'k small (1 pack X 20 unit) (case)',
         sku: '000109343968305',
         quantity: 4,

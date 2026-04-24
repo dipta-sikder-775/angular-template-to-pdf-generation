@@ -2,18 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../utils/generate-html-to-pdf';
-import { InvoiceComponent } from './components/invoice/invoice.component';
 import { TransactionInvoiceCreateOrderPDF } from './components/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.component';
 import { InvoiceCreateOrderV2PDF } from './experimental-pages/invoice-create-order-v2-pdf';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    InvoiceComponent,
-    InvoiceCreateOrderV2PDF,
-    TransactionInvoiceCreateOrderPDF,
-  ],
+  imports: [InvoiceCreateOrderV2PDF, TransactionInvoiceCreateOrderPDF],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -22,12 +17,10 @@ export class AppComponent {
   invoiceComponent?: InvoiceCreateOrderV2PDF;
   isLoading = false;
 
-  // constructor(private pdfService: PdfExportService) {}
-
   async download() {
     this.isLoading = true;
     try {
-      const invoiceElement = this.invoiceComponent?.invoiceElement;
+      const invoiceElement = this.invoiceComponent?.docRootNativeElement;
 
       if (!invoiceElement) {
         throw new Error('Invoice element is not available for PDF export.');
@@ -37,7 +30,7 @@ export class AppComponent {
         src: invoiceElement,
         fileName: 'MyInvoice.pdf',
         configureHtmlOption: {
-          y: -20,
+          // y: -20,
           callback: (pdf) => {
             generatePDFFooter(pdf, [
               {

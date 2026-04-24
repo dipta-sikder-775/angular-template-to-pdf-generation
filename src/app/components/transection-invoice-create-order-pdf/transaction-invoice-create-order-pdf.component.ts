@@ -8,7 +8,7 @@ import { TransactionPDFInvoiceBarcode } from './transaction-pdf-invoice-barcode/
 import { TransactionPDFInvoiceBusinessLogo } from './transaction-pdf-invoice-business-logo/transaction-pdf-invoice-business-logo.component';
 import { TransactionPDFInvoiceInstalmentBreakdown } from './transaction-pdf-invoice-instalment-breakdown/transaction-pdf-invoice-instalment-breakdown.component';
 import { TransactionPDFInvoiceItemsTable } from './transaction-pdf-invoice-items-table/transaction-pdf-invoice-items-table.component';
-import { TransactionPDFInvoiceOrderTypeAmount } from './transaction-pdf-invoice-order-type-amount/transaction-pdf-invoice-order-type-amount.component';
+import { TransactionPDFInvoiceOrderTypeAmount } from './transaction-pdf-invoice-order-details/transaction-pdf-invoice-order-details.component';
 import { TransactionPDFInvoicePaymentDetails } from './transaction-pdf-invoice-payment-details/transaction-pdf-invoice-payment-details.component';
 import { TransactionPDFInvoiceQrCode } from './transaction-pdf-invoice-qr-code/transaction-pdf-invoice-qr-code.component';
 import { TransactionPDFInvoiceSummary } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.component';
@@ -78,18 +78,46 @@ export class TransactionInvoiceCreateOrderPDF {
   }
 
   invoiceData: TransactionInvoiceCreateOrderPdfData = {
-    invNo: 'INV-00001026733-9336-881',
-    accountNo: '56766666520',
-    issueDate: '03-04-2026',
-    deliveryDate: '09-04-2026',
-    vatNumber: '2313131',
+    // row 1: Invoice basic info start
+    //  1-1. Invoice Summary
+    invoiceSummaryData: {
+      title: 'Invoice',
+      data: [
+        {
+          label: 'INV No',
+          value: 'INV-00001026733-9336-881',
+        },
+        {
+          label: 'VAT Number',
+          value: '2313131',
+        },
+        {
+          label: 'Issue Date',
+          value: '03-04-2026',
+        },
+        {
+          label: 'Delivery Date',
+          value: '09-04-2026',
+        },
+        {
+          label: 'Vat Number',
+          value: '2313131',
+        },
+      ],
+    },
+    // 1-2. Invoice qr code
     qrCodeUrl:
       'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    // 1-3. Invoice barcode
     barcodeUrl:
       'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
-    orderType: 'Delivery',
+    // 1-4. Business Logo
     businessLogoData: { businessName: 'business', businessId: 10 },
-    stockType: 'kiosk',
+    // row 1: Invoice basic info end
+
+    /* ----------------------------------------------------- */
+
+    // 2-1. supplier details
     supplier: {
       name: 'VALT TECH LIMITED',
       address: [
@@ -99,6 +127,7 @@ export class TransactionInvoiceCreateOrderPDF {
         'MK11FE',
       ],
     },
+    // 2-2. bill to details
     billTo: {
       name: 'YO LTD',
       address: [
@@ -109,6 +138,7 @@ export class TransactionInvoiceCreateOrderPDF {
         'United Kingdom',
       ],
     },
+    // 2-3. delivery to details
     deliverTo: {
       name: 'ABD LTD',
       address: [
@@ -119,6 +149,27 @@ export class TransactionInvoiceCreateOrderPDF {
         'United Kingdom',
       ],
     },
+
+    /* ----------------------------------------------------- */
+
+    // 3-1 order details
+    orderDetails: [
+      {
+        label: 'Order Type',
+        value: 'Delivery',
+        size: 'medium',
+      },
+      {
+        label: 'Due',
+        value: '£48.00',
+        size: 'large',
+      },
+    ],
+
+    accountNo: '56766666520',
+
+    stockType: 'kiosk',
+
     items: [
       {
         img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',

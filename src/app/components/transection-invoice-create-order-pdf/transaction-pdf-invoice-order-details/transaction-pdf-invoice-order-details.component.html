@@ -1,0 +1,32 @@
+<div style="margin-bottom: 15px">
+  @if (orderDetails?.length) {
+    @for (item of orderDetails; track item.label) {
+      @switch (item.size) {
+        @case ("large") {
+          <p
+            style="
+              font-size: 22px;
+              margin: 1px 0 0 0;
+              font-weight: bold;
+              color: #000;
+            "
+          >
+            {{ item?.value }} {{ item?.label }}
+          </p>
+        }
+        @case ("medium") {
+          <p style="margin: 2px 0; font-size: 15px">
+            <strong>{{ item?.label }}</strong>
+            <span style="margin-left: 10px"> {{ item?.value }}</span>
+          </p>
+        }
+        @case ("small") {
+          <p style="margin: 2px 0; font-size: 14px">
+            <strong>{{ item?.label }}</strong>
+            <span style="margin-left: 10px"> {{ item?.value }}</span>
+          </p>
+        }
+      }
+    }
+  }
+</div>
