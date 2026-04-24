@@ -1,2 +1,8 @@
 <app-invoice />
-<transaction-invoice-create-order-pdf />
+<!-- <transaction-invoice-create-order-pdf /> -->
+<app-invoice-create-order-v2-pdf />
+
+<button (click)="download()" [disabled]="isLoading">
+  {{ isLoading ? "Generating PDF..." : "Download PDF" }}
+  <!-- "Download PDF" -->
+</button>

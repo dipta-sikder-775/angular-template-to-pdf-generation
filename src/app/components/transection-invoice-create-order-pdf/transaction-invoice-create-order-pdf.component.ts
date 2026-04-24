@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { generateHtmlToPDF } from '../../../utils/pdf-export.util';
+import generateHtmlToPDF from '../../../utils/generate-html-to-pdf';
 import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
 import { TransactionPDFInvoiceAddressColumn } from './transaction-pdf-invoice-address-column/transaction-pdf-invoice-address-column.component';
 import { TransactionPDFInvoiceBarcode } from './transaction-pdf-invoice-barcode/transaction-pdf-invoice-barcode.component';
