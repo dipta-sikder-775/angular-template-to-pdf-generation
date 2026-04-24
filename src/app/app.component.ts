@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InvoiceCreateOrderV2PDF } from './experimental-pages/invoice-create-order-v2-pdf';
 import generateHtmlToPDF, { generatePDFFooter } from '../utils/generate-html-to-pdf';
+import { TransactionInvoiceCreateOrderPDF } from "./components/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [InvoiceComponent, InvoiceCreateOrderV2PDF],
+  imports: [InvoiceComponent, InvoiceCreateOrderV2PDF, TransactionInvoiceCreateOrderPDF],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

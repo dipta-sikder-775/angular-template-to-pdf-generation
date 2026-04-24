@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import generateHtmlToPDF from '../../../utils/generate-html-to-pdf';
+import generateHtmlToPDF, {
+  generatePDFFooter,
+} from '../../../utils/generate-html-to-pdf';
 import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
 import { TransactionPDFInvoiceAddressColumn } from './transaction-pdf-invoice-address-column/transaction-pdf-invoice-address-column.component';
 import { TransactionPDFInvoiceBarcode } from './transaction-pdf-invoice-barcode/transaction-pdf-invoice-barcode.component';
@@ -30,8 +32,6 @@ import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax
   templateUrl: './transaction-invoice-create-order-pdf.component.html',
 })
 export class TransactionInvoiceCreateOrderPDF {
-  // @ViewChild('transactionPDFInvoiceContainer')
-  // transactionPDFInvoiceContainer?: ElementRef<HTMLElement>;
   @ViewChild('transactionPDFInvoiceContainer', { static: false })
   invoiceElement!: ElementRef;
   isLoading = false;
@@ -39,12 +39,42 @@ export class TransactionInvoiceCreateOrderPDF {
   // constructor(private pdfService: PdfExportService) {}
 
   async download() {
-    this.isLoading = true;
-    await generateHtmlToPDF({
-      src: this.invoiceElement.nativeElement,
-      fileName: 'MyInvoice.pdf',
-    });
-    this.isLoading = false;
+    try {
+      this.isLoading = true;
+      await generateHtmlToPDF({
+        src: this.invoiceElement.nativeElement,
+        fileName: 'MyInvoice.pdf',
+        configureHtmlOption: {
+          // y: -20,
+          callback: (pdf) => {
+            generatePDFFooter(pdf, [
+              {
+                text: 'All items are revertible until full paid',
+                align: 'left',
+                showOn: 'last',
+                fontSize: 8,
+                fontStyle: 'italic',
+                colorRGB: [153, 153, 153],
+              },
+              {
+                text: (currentPage, totalPages) =>
+                  `Page ${currentPage} of ${totalPages}`,
+                align: 'right',
+                showOn: 'all',
+                fontSize: 7,
+                colorRGB: [51, 51, 51],
+              },
+            ]);
+
+            pdf.save('MyInvoice.pdf');
+          },
+        },
+      });
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   invoiceData: TransactionInvoiceCreateOrderPdfData = {
