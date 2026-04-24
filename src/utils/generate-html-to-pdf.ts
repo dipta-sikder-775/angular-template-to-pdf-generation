@@ -111,9 +111,13 @@ export default async function generateHtmlToPDF({
 type FooterTextConfig = {
   text: string | ((currentPage: number, totalPages: number) => string);
   align: 'left' | 'center' | 'right';
-  fontStyle?: 'normal' | 'italic' | 'bold' | 'bolditalic';
+  fontStyle?: ('normal' | 'italic' | 'bold' | 'bolditalic') | (string & {});
   fontSize?: number;
-  colorRGB?: [number, number, number]; // RGB
+  colorRGB?: {
+    r: number;
+    g: number;
+    b: number;
+  }; // RGB
   showOn?:
     | 'all'
     | 'first'
@@ -209,10 +213,13 @@ export function generatePDFFooter(
         typeof cfg.text === 'function' ? cfg.text(i, totalPages) : cfg.text;
 
       // 3. Set Styles
-      pdf.setFont('helvetica', cfg.fontStyle || 'normal');
+      pdf.setFont(
+        'helvetica',
+        (cfg.fontStyle as unknown as string) || 'normal',
+      );
       pdf.setFontSize(cfg.fontSize || 10);
 
-      const [r, g, b] = cfg.colorRGB || [100, 100, 100];
+      const { r, g, b } = cfg.colorRGB || { r: 100, g: 100, b: 100 };
       pdf.setTextColor(r, g, b);
 
       // 4. Calculate X position based on alignment

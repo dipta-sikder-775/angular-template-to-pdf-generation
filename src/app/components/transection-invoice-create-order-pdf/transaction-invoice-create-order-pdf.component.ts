@@ -54,7 +54,7 @@ export class TransactionInvoiceCreateOrderPDF {
                 showOn: 'last',
                 fontSize: 8,
                 fontStyle: 'italic',
-                colorRGB: [153, 153, 153],
+                colorRGB: { r: 153, g: 153, b: 153 },
               },
               {
                 text: (currentPage, totalPages) =>
@@ -62,7 +62,7 @@ export class TransactionInvoiceCreateOrderPDF {
                 align: 'right',
                 showOn: 'all',
                 fontSize: 7,
-                colorRGB: [51, 51, 51],
+                colorRGB: { r: 51, g: 51, b: 51 },
               },
             ]);
 

@@ -1,13 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
+import generateHtmlToPDF, {
+  generatePDFFooter,
+} from '../utils/generate-html-to-pdf';
 import { InvoiceComponent } from './components/invoice/invoice.component';
+import { TransactionInvoiceCreateOrderPDF } from './components/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.component';
 import { InvoiceCreateOrderV2PDF } from './experimental-pages/invoice-create-order-v2-pdf';
-import generateHtmlToPDF, { generatePDFFooter } from '../utils/generate-html-to-pdf';
-import { TransactionInvoiceCreateOrderPDF } from "./components/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [InvoiceComponent, InvoiceCreateOrderV2PDF, TransactionInvoiceCreateOrderPDF],
+  imports: [
+    InvoiceComponent,
+    InvoiceCreateOrderV2PDF,
+    TransactionInvoiceCreateOrderPDF,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -40,7 +46,7 @@ export class AppComponent {
                 showOn: 'last',
                 fontSize: 8,
                 fontStyle: 'italic',
-                colorRGB: [153, 153, 153],
+                colorRGB: { r: 153, g: 153, b: 153 },
               },
               {
                 text: (currentPage, totalPages) =>
@@ -48,7 +54,7 @@ export class AppComponent {
                 align: 'right',
                 showOn: 'all',
                 fontSize: 7,
-                colorRGB: [51, 51, 51],
+                colorRGB: { r: 51, g: 51, b: 51 },
               },
             ]);
 
