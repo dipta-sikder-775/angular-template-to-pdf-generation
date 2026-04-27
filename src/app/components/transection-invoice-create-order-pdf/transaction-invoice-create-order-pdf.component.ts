@@ -166,7 +166,7 @@ export class TransactionInvoiceCreateOrderPDF {
       },
     ],
 
-    accountNo: '56766666520',
+    // accountNo: '56766666520',
 
     stockType: 'kiosk',
 
@@ -230,7 +230,7 @@ export class TransactionInvoiceCreateOrderPDF {
     ],
     subtotal: '40.00',
     totalVat: '8.00',
-    totalAmount: '48.00',
+    // totalAmount: '48.00',
     installments: [
       { date: '10-04-2026', due: '33.60', status: 'Pending' },
       { date: '17-04-2026', due: '43.20', status: 'Pending' },
