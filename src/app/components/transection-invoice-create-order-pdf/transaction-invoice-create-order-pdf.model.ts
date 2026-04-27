@@ -103,12 +103,14 @@ export const COLUMNS: ICustomDynamicTableColumn<TransactionInvoiceInstalment>[] 
       header: {
         headerCellContent: 'Date',
         key: 'date',
-        // class: 'text-left font-bold',
+        style: { padding: '6px 5px', fontWeight: '700' },
       },
       body: {
         key: 'date',
-        class: (row, loop) =>
-          loop.isFirstItem ? 'text-blue-500 underline' : 'text-gray-900',
+        style: {
+          padding: '6px 5px',
+          fontSize: '13px',
+        },
         bodyCellContent: (row) => row?.date || 'N/A',
       },
     },
@@ -116,19 +118,31 @@ export const COLUMNS: ICustomDynamicTableColumn<TransactionInvoiceInstalment>[] 
       header: {
         headerCellContent: 'Due',
         key: 'due',
-        // style: { color: '#666' },
+        style: { padding: '6px 5px', fontWeight: '700' },
       },
       body: {
         key: (row) => row?.due ?? 'N/A',
         bodyCellContent: (row) => `£${row?.due ?? 'N/A'}`,
+        style: {
+          padding: '6px 5px',
+          fontSize: '13px',
+        },
       },
     },
     {
-      header: { headerCellContent: 'Status', key: 'status' },
+      header: {
+        headerCellContent: 'Status',
+        key: 'status',
+        style: { padding: '6px 5px', fontWeight: '700' },
+      },
       body: {
         key: 'status',
         bodyCellContent(data, loopData) {
           return data?.status;
+        },
+        style: {
+          padding: '6px 5px',
+          fontSize: '13px',
         },
       },
     },
