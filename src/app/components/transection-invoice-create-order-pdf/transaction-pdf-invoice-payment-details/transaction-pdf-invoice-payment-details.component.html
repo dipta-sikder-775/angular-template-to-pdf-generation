@@ -1,32 +1,27 @@
 <div style="font-size: 11px; color: #333; margin-bottom: 20px">
-    <p style="margin: 0 0 5px 0; font-size: 13px">
-        <strong>Pay by Bank Transfer</strong>
-    </p>
-    <p style="margin: 2px 0">
-        Account Name: {{ bank.accountName }} | Account No:
-        {{ bank.accountNo }} | Sort Code: {{ bank.sortCode }}
-    </p>
+  <p style="margin: 0 0 5px 0; font-size: 13px">
+    <strong>Pay by Bank Transfer</strong>
+  </p>
+  <p style="margin: 2px 0">
+    Account Name: {{ bank.accountName }} | Account No: {{ bank.accountNo }} |
+    Sort Code: {{ bank.sortCode }}
+  </p>
 </div>
 
 <div style="margin-top: 30px; font-size: 13px; color: #333">
-    <p style="margin: 0 0 5px 0; font-size: 13px">
-        <strong>International Payment</strong>
-    </p>
-    <p style="margin: 2px 0">
-        BIC: {{ bank.bic }} | Intermediary BIC: {{ bank.intermediaryBic }} |
-        IBAN: {{ bank.iban }}
-    </p>
+  <p style="margin: 0 0 5px 0; font-size: 13px">
+    <strong>International Payment</strong>
+  </p>
+  <p style="margin: 2px 0">
+    BIC: {{ bank.bic }} | Intermediary BIC: {{ bank.intermediaryBic }} | IBAN:
+    {{ bank.iban }}
+  </p>
 </div>
 
 @if (footerNote) {
-    <div
-        style="
-            margin-top: 20px;
-            font-size: 11px;
-            color: #555;
-            font-style: italic;
-        "
-    >
-        {{ footerNote }}
-    </div>
+  <div
+    style="margin-top: 20px; font-size: 11px; color: #555; font-style: italic"
+  >
+    {{ footerNote }}
+  </div>
 }

@@ -88,11 +88,15 @@
     [stockType]="invoiceData.stockType"
   />
 
-  <transaction-pdf-invoice-tax-and-totals
+  <!-- <transaction-pdf-invoice-tax-and-totals
     [taxSummary]="invoiceData.taxSummary"
     [subtotal]="invoiceData.subtotal"
     [totalVat]="invoiceData.totalVat"
     [totalAmount]="invoiceData.totalAmount"
+  /> -->
+  <dynamic-custom-table
+    [columns]="tableColumns"
+    [data]="tableAssetData"
   />
 
   <transaction-pdf-invoice-instalment-breakdown

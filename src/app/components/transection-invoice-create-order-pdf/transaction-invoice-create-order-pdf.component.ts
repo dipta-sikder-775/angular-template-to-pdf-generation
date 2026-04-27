@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../../../utils/generate-html-to-pdf';
-import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
+import { ASSETS, COLUMNS, TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
 import { TransactionPDFInvoiceAddressColumn } from './transaction-pdf-invoice-address-column/transaction-pdf-invoice-address-column.component';
 import { TransactionPDFInvoiceBarcode } from './transaction-pdf-invoice-barcode/transaction-pdf-invoice-barcode.component';
 import { TransactionPDFInvoiceBusinessLogo } from './transaction-pdf-invoice-business-logo/transaction-pdf-invoice-business-logo.component';
@@ -13,6 +13,7 @@ import { TransactionPDFInvoicePaymentDetails } from './transaction-pdf-invoice-p
 import { TransactionPDFInvoiceQrCode } from './transaction-pdf-invoice-qr-code/transaction-pdf-invoice-qr-code.component';
 import { TransactionPDFInvoiceSummary } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.component';
 import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax-and-totals/transaction-pdf-invoice-tax-and-totals.component';
+import { DynamicCustomTableComponent } from "../../dynamic-custom-table/dynamic-custom-table.component";
 
 @Component({
   selector: 'transaction-invoice-create-order-pdf',
@@ -28,7 +29,8 @@ import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax
     TransactionPDFInvoiceTaxAndTotals,
     TransactionPDFInvoiceInstalmentBreakdown,
     TransactionPDFInvoicePaymentDetails,
-  ],
+    DynamicCustomTableComponent
+],
   templateUrl: './transaction-invoice-create-order-pdf.component.html',
 })
 export class TransactionInvoiceCreateOrderPDF {
@@ -37,6 +39,14 @@ export class TransactionInvoiceCreateOrderPDF {
   isLoading = false;
 
   // constructor(private pdfService: PdfExportService) {}
+
+  get tableAssetData() {
+    return ASSETS;
+  }
+
+  get tableColumns() {
+    return COLUMNS;
+  }
 
   async download() {
     try {

@@ -1,3 +1,4 @@
+import { ICustomDynamicTableColumn } from '../../dynamic-custom-table/dynamic-custom-table.component.model';
 import { IBusinessLogoData } from './transaction-pdf-invoice-business-logo/transaction-pdf-invoice-business-logo.model';
 import { IInvoiceSummaryData } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.model';
 
@@ -84,3 +85,51 @@ export interface TransactionInvoiceCreateOrderPdfData {
   bank: TransactionInvoiceBankDetails;
   footerNote: string;
 }
+
+export const ASSETS: TransactionInvoiceInstalment[] = [
+  { date: '10-04-2026', due: '33.60', status: 'Pending' },
+  { date: '17-04-2026', due: '43.20', status: 'Pending' },
+  { date: '24-04-2026', due: '43.20', status: 'Pending' },
+  { date: '01-05-2026', due: '43.20', status: 'Pending' },
+  { date: '08-05-2026', due: '43.20', status: 'Pending' },
+  { date: '15-05-2026', due: '43.20', status: 'Pending' },
+  { date: '22-05-2026', due: '43.20', status: 'Pending' },
+  { date: '29-05-2026', due: '43.20', status: 'Pending' },
+];
+
+export const COLUMNS: ICustomDynamicTableColumn<TransactionInvoiceInstalment>[] =
+  [
+    {
+      header: {
+        headerCellContent: 'Date',
+        key: 'date',
+        // class: 'text-left font-bold',
+      },
+      body: {
+        key: 'date',
+        class: (row, loop) =>
+          loop.isFirstItem ? 'text-blue-500 underline' : 'text-gray-900',
+        bodyCellContent: (row) => row?.date || 'N/A',
+      },
+    },
+    {
+      header: {
+        headerCellContent: 'Due',
+        key: 'due',
+        // style: { color: '#666' },
+      },
+      body: {
+        key: (row) => row?.due ?? 'N/A',
+        bodyCellContent: (row) => `£${row?.due ?? 'N/A'}`,
+      },
+    },
+    {
+      header: { headerCellContent: 'Status', key: 'status' },
+      body: {
+        key: 'status',
+        bodyCellContent(data, loopData) {
+          return data?.status;
+        },
+      },
+    },
+  ];
