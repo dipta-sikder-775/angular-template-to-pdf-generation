@@ -2,7 +2,7 @@
   <table [class]="tableClass" [style]="tableStyle">
     <thead [class]="tableHeadClass" [style]="tableHeadStyle">
       <tr [class]="tableHeadRowClass" [style]="tableHeadRowStyle">
-        @for (col of tableColumn; track $index) {
+        @for (col of tableColumn; track col?.header?.key) {
           <th
             [class]="
               resolveStyle(col?.header?.class, null, {
@@ -83,9 +83,9 @@
     </thead>
 
     <tbody [class]="tableBodyClass" [style]="tableBodyStyle">
-      @for (row of tableData; track $index) {
+      @for (row of tableData; track resolveRowKey(row)) {
         <tr [class]="tableBodyRowClass" [style]="tableBodyRowStyle">
-          @for (col of tableColumn; track $index) {
+          @for (col of tableColumn; track col?.header?.key) {
             <td
               [class]="
                 resolveStyle(col?.body?.class, row, {

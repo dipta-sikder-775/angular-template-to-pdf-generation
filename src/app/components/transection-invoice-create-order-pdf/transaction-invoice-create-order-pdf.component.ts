@@ -168,6 +168,38 @@ export class TransactionInvoiceCreateOrderPDF {
       },
     ],
 
+    // 5-1 tax details
+    taxDetails: [
+      {
+        rate: 'T1(20%)',
+        goods: '40.00',
+        vatAmount: '8.00',
+        net: '40.00',
+        total: '48.00',
+      },
+      {
+        rate: 'T1(20%)',
+        goods: '40.00',
+        vatAmount: '8.00',
+        net: '40.00',
+        total: '48.00',
+      },
+      {
+        rate: 'T1(20%)',
+        goods: '40.00',
+        vatAmount: '8.00',
+        net: '40.00',
+        total: '48.00',
+      },
+      {
+        rate: 'T1(20%)',
+        goods: '40.00',
+        vatAmount: '8.00',
+        net: '40.00',
+        total: '48.00',
+      },
+    ],
+
     // accountNo: '56766666520',
 
     stockType: 'kiosk',
@@ -200,36 +232,7 @@ export class TransactionInvoiceCreateOrderPDF {
         amount: '40.00',
       },
     ],
-    taxSummary: [
-      {
-        rate: 'T1(20%)',
-        goods: '40.00',
-        vatAmount: '8.00',
-        net: '40.00',
-        total: '48.00',
-      },
-      {
-        rate: 'T1(20%)',
-        goods: '40.00',
-        vatAmount: '8.00',
-        net: '40.00',
-        total: '48.00',
-      },
-      {
-        rate: 'T1(20%)',
-        goods: '40.00',
-        vatAmount: '8.00',
-        net: '40.00',
-        total: '48.00',
-      },
-      {
-        rate: 'T1(20%)',
-        goods: '40.00',
-        vatAmount: '8.00',
-        net: '40.00',
-        total: '48.00',
-      },
-    ],
+
     subtotal: '40.00',
     totalVat: '8.00',
     totalAmount: '48.00',

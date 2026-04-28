@@ -16,12 +16,12 @@ export interface TransactionInvoiceLineItem {
   amount: string;
 }
 
-export interface TransactionInvoiceTaxSummaryRow {
-  rate: string;
-  goods: string;
-  vatAmount: string;
-  net: string;
-  total: string;
+export interface TransactionInvoiceTaxDetailsRow {
+  rate: string | number | null | undefined;
+  goods: string | number | null | undefined;
+  vatAmount: string | number | null | undefined;
+  net: string | number | null | undefined;
+  total: string | number | null | undefined;
 }
 
 export interface TransactionInvoiceInstalment {
@@ -75,9 +75,14 @@ export interface TransactionInvoiceCreateOrderPdfData {
     | null
     | undefined;
 
+  // 5-1 tax details
+  taxDetails?: TransactionInvoiceTaxDetailsRow[] | null | undefined;
+
+  // 5-2. tax summary
+
   stockType: string;
   items: TransactionInvoiceLineItem[];
-  taxSummary: TransactionInvoiceTaxSummaryRow[];
+  // taxSummary: TransactionInvoiceTaxSummaryRow[];
   subtotal: string;
   totalVat: string;
   installments: TransactionInvoiceInstalment[];

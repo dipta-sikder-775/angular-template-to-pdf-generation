@@ -15,13 +15,13 @@ export interface ILoopData {
   isEven: boolean;
   isOdd: boolean;
 }
-export type TSimpleStyle = string | Partial<CSSStyleDeclaration> | undefined;
+export type TSimpleStyle = string | Partial<CSSStyleProperties> | undefined;
 export type TStyle<T> =
   | TSimpleStyle
   | ((
       data: T | null | undefined,
       loopData: ILoopData,
-    ) => string | Partial<CSSStyleDeclaration>);
+    ) => string | Partial<CSSStyleProperties>);
 
 export interface ICellProps<T extends TGenericExtends> {
   headerCellContent:
@@ -51,7 +51,7 @@ export interface ICellProps<T extends TGenericExtends> {
   /**
    * The key to used for tracking unique content
    */
-  key: keyof T | ((row: T | null | undefined) => TRenderableValue);
+  key: string | number | ((row: T | null | undefined) => TRenderableValue);
   style?: TStyle<T>;
   class?: TStyle<T>;
   colspan?: number;

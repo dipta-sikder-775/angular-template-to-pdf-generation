@@ -1,7 +1,7 @@
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px">
   <tr>
     <td style="width: 60%; vertical-align: top">
-      <table style="width: 95%; border-collapse: collapse">
+      <!-- <table style="width: 95%; border-collapse: collapse">
         <thead>
           <tr
             style="
@@ -30,16 +30,13 @@
             </tr>
           }
         </tbody>
-      </table>
+      </table> -->
 
-      <dynamic-custom-table
-        [columns]="[]"
-        [data]="[]"
-      />
+      <tax-details-table [taxDetails]="taxDetails" />
     </td>
 
     <td style="width: 40%; vertical-align: top">
-      <table style="width: 100%; border-collapse: collapse">
+      <!-- <table style="width: 100%; border-collapse: collapse">
         <tbody>
           <tr>
             <td style="padding: 5px 0; font-size: 13px">Subtotal</td>
@@ -68,7 +65,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </td>
   </tr>
 </table>

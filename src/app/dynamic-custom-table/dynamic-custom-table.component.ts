@@ -29,6 +29,9 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
   @Input() tableBodyStyle: TSimpleStyle;
   @Input() tableBodyRowClass: TSimpleStyle;
   @Input() tableBodyRowStyle: TSimpleStyle;
+  @Input() dataRowKey:
+    | ((row: T | null | undefined) => string | number | null | undefined)
+    | undefined;
 
   ensureArray<T>(value: unknown): T[] {
     if (value === null || value === undefined) {
@@ -70,44 +73,35 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
     return props?.headerCellContent;
   }
 
-  /**
-   * Resolves the key (handles key as a property name or a transformation function)
-   */
-  resolveKey(
-    props: ICustomDynamicTableColumn<T>['body'] | undefined | null,
-    row: T,
-  ): TRenderableValue {
-    // Early return if key is not defined, to avoid unnecessary processing and potential errors
-    if (
-      typeof props?.key !== 'string' &&
-      typeof props?.key !== 'number' &&
-      typeof props?.key !== 'symbol' &&
-      typeof props?.key !== 'function'
-    ) {
-      return null;
+  resolveRowKey(row: unknown) {
+    if (typeof row === 'undefined' || row === null) {
+      return crypto.randomUUID();
     }
 
-    if (typeof props?.key === 'function') {
-      return props?.key?.(row);
+    if (row && typeof row === 'object') {
+      if (typeof this.dataRowKey === 'function') {
+        const result = this.dataRowKey(row as unknown as T | null | undefined);
+        if (result !== undefined && result !== null) {
+          return result;
+        }
+      } else if ('id' in row) {
+        return row.id;
+      } else if ('_id' in row) {
+        return row._id;
+      }
+
+      return crypto.randomUUID();
     }
 
     if (
-      typeof row === 'boolean' ||
       typeof row === 'string' ||
-      typeof row === 'number'
+      typeof row === 'number' ||
+      typeof row === 'boolean'
     ) {
       return row;
     }
 
-    switch (typeof row?.[props?.key]) {
-      case 'string':
-      case 'number':
-      case 'symbol':
-        return row?.[props?.key] as TRenderableValue;
-
-      default:
-        return null;
-    }
+    return crypto.randomUUID();
   }
 
   /**
