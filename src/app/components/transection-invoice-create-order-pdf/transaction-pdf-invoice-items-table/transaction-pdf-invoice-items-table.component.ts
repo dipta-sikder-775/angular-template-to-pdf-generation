@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
+import { ITransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
 
 @Component({
   selector: 'transaction-pdf-invoice-items-table',
@@ -10,7 +10,7 @@ import { TransactionInvoiceLineItem } from '../transaction-invoice-create-order-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionPDFInvoiceItemsTable {
-  @Input({ required: true }) items!: readonly TransactionInvoiceLineItem[];
+  @Input({ required: true }) items!: readonly ITransactionInvoiceLineItem[];
   @Input({ required: true }) stockType!: string;
 
   tableHeaderData: {

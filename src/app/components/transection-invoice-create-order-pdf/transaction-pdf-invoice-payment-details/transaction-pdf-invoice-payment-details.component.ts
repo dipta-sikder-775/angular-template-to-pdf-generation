@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TransactionInvoiceBankDetails } from '../transaction-invoice-create-order-pdf.model';
+import { ITransactionInvoiceBankDetails } from '../transaction-invoice-create-order-pdf.model';
 
 @Component({
     selector: 'transaction-pdf-invoice-payment-details',
@@ -10,6 +10,6 @@ import { TransactionInvoiceBankDetails } from '../transaction-invoice-create-ord
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionPDFInvoicePaymentDetails {
-    @Input({ required: true }) bank!: TransactionInvoiceBankDetails;
+    @Input({ required: true }) bank!: ITransactionInvoiceBankDetails;
     @Input() footerNote = '';
 }

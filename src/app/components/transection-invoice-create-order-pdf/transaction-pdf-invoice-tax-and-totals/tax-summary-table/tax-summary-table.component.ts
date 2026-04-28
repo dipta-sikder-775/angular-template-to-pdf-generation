@@ -1,28 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DynamicCustomTableComponent } from '../../../../dynamic-custom-table/dynamic-custom-table.component';
-import { ITransactionInvoiceTaxDetailsRow } from '../../transaction-invoice-create-order-pdf.model';
+import { ITaxSummaryRow } from '../../transaction-invoice-create-order-pdf.model';
 import {
-  TAX_DETAILS_TABLE_COLUMNS,
-  TAX_DETAILS_TABLE_STYLES,
-} from './tax-details-table.component.model';
+  TAX_SUMMARY_TABLE_COLUMNS,
+  TAX_SUMMARY_TABLE_STYLES,
+} from './tax-summary-table.component.model';
 
 @Component({
-  selector: 'tax-details-table',
+  selector: 'tax-summary-table',
   standalone: true,
   imports: [CommonModule, DynamicCustomTableComponent],
-  templateUrl: './tax-details-table.component.html',
+  templateUrl: './tax-summary-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaxDetailsTableComponent {
+export class TaxSummaryTableComponent {
   @Input({ required: false })
-  taxDetails!: readonly ITransactionInvoiceTaxDetailsRow[] | null | undefined;
+  taxSummary!: readonly ITaxSummaryRow[] | null | undefined;
 
   get taxDetailsTableColumns() {
-    return TAX_DETAILS_TABLE_COLUMNS;
+    return TAX_SUMMARY_TABLE_COLUMNS;
   }
 
   get taxDetailsTableStyles() {
-    return TAX_DETAILS_TABLE_STYLES;
+    return TAX_SUMMARY_TABLE_STYLES;
   }
 }

@@ -1,7 +1,7 @@
 import { ICustomDynamicTableColumn } from '../../../dynamic-custom-table/dynamic-custom-table.component.model';
-import { TransactionInvoiceInstalment } from '../transaction-invoice-create-order-pdf.model';
+import { ITransactionInvoiceInstalment } from '../transaction-invoice-create-order-pdf.model';
 
-export const INVOICE_INSTALLMENT_TABLE_COLUMN: ICustomDynamicTableColumn<TransactionInvoiceInstalment>[] =
+export const INVOICE_INSTALLMENT_TABLE_COLUMN: ICustomDynamicTableColumn<ITransactionInvoiceInstalment>[] =
   [
     {
       header: {

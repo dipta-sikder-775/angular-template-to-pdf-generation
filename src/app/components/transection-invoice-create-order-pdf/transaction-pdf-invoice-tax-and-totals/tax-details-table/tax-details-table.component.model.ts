@@ -2,10 +2,10 @@ import {
   ICustomDynamicTableColumn,
   TSimpleStyle,
 } from '../../../../dynamic-custom-table/dynamic-custom-table.component.model';
-import { TransactionInvoiceTaxDetailsRow } from '../../transaction-invoice-create-order-pdf.model';
+import { ITransactionInvoiceTaxDetailsRow } from '../../transaction-invoice-create-order-pdf.model';
 
 const tableHeaderStyle: NonNullable<
-  ICustomDynamicTableColumn<TransactionInvoiceTaxDetailsRow>['header']
+  ICustomDynamicTableColumn<ITransactionInvoiceTaxDetailsRow>['header']
 >['style'] = {
   padding: '8px 5px',
   fontWeight: '700',
@@ -14,6 +14,7 @@ const tableHeaderStyle: NonNullable<
 export const TAX_DETAILS_TABLE_STYLES: {
   tableStyle: TSimpleStyle;
   tableHeadRowStyle: TSimpleStyle;
+  tableBodyRowStyle: TSimpleStyle;
 } = {
   tableStyle: { width: '95%', borderCollapse: 'collapse' },
   tableHeadRowStyle: {
@@ -22,9 +23,13 @@ export const TAX_DETAILS_TABLE_STYLES: {
     color: '#444',
     borderBottom: '1px solid #333',
   },
+  tableBodyRowStyle: {
+    fontSize: '13px',
+    borderBottom: '1px solid #eee',
+  },
 };
 
-export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<TransactionInvoiceTaxDetailsRow>[] =
+export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceTaxDetailsRow>[] =
   [
     {
       header: {
@@ -45,7 +50,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<TransactionInv
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => data?.rate,
+        bodyCellContent: (data) => `£${data?.goods}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },
@@ -57,7 +62,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<TransactionInv
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => data?.rate,
+        bodyCellContent: (data) => `£${data?.vatAmount}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },
@@ -69,7 +74,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<TransactionInv
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => data?.rate,
+        bodyCellContent: (data) => `£${data?.net}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },
@@ -81,7 +86,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<TransactionInv
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => data?.rate,
+        bodyCellContent: (data) => `£${data?.total}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },

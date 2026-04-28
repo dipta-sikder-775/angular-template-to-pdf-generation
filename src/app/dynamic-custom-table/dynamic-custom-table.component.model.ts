@@ -1,4 +1,4 @@
-import { TemplateRef } from '@angular/core';
+import { TemplateRef, Type } from '@angular/core';
 export type TRenderableValue = string | number | boolean | null | undefined;
 export type TGenericExtends =
   | Record<PropertyKey, any>
@@ -15,13 +15,13 @@ export interface ILoopData {
   isEven: boolean;
   isOdd: boolean;
 }
-export type TSimpleStyle = string | Partial<CSSStyleProperties> | undefined;
+export type TSimpleStyle = string | Partial<CSSStyleDeclaration> | undefined;
 export type TStyle<T> =
   | TSimpleStyle
   | ((
       data: T | null | undefined,
       loopData: ILoopData,
-    ) => string | Partial<CSSStyleProperties>);
+    ) => string | Partial<CSSStyleDeclaration>);
 
 export interface ICellProps<T extends TGenericExtends> {
   headerCellContent:
@@ -48,6 +48,9 @@ export interface ICellProps<T extends TGenericExtends> {
     | TemplateRef<any>
     | null
     | undefined;
+  component?:
+    | Type<any>
+    | ((row: T | null | undefined, data: T[] | null | undefined) => Type<any>);
   /**
    * The key to used for tracking unique content
    */

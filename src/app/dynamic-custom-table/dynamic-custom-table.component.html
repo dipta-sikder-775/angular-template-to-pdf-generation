@@ -83,7 +83,16 @@
     </thead>
 
     <tbody [class]="tableBodyClass" [style]="tableBodyStyle">
-      @for (row of tableData; track resolveRowKey(row)) {
+      @for (
+        row of tableData;
+        track resolveRowKey(row);
+        let rowIndex = $index;
+        let rowCount = $count;
+        let isFirst = $first;
+        let isLast = $last;
+        let isEven = $even;
+        let isOdd = $odd
+      ) {
         <tr [class]="tableBodyRowClass" [style]="tableBodyRowStyle">
           @for (col of tableColumn; track col?.header?.key) {
             <td
@@ -110,13 +119,38 @@
               [attr.colspan]="col?.body?.colspan"
               [attr.rowspan]="col?.body?.rowspan"
             >
-              @if (col?.body?.customTemplate) {
+              <!-- @if (col?.body?.customTemplate) {
                 <ng-container
                   *ngTemplateOutlet="
                     resolveBodyTemplate(col?.body?.customTemplate, row, data);
                     context: { $implicit: row }
                   "
                 ></ng-container>
+              } @else {
+                {{
+                  resolveBodyCellContent(col?.body?.bodyCellContent, row, data)
+                }}
+              } -->
+
+              @if (getComponent(col?.body?.component, row)) {
+                <ng-container
+                  *ngComponentOutlet="
+                    getComponent(col.body.component, row);
+                    inputs: {
+                      row: row,
+                      data: data,
+                      loop: {
+                        index: rowIndex,
+                        count: rowCount,
+                        isFirstItem: isFirst,
+                        isLastItem: isLast,
+                        isEven: isEven,
+                        isOdd: isOdd,
+                      },
+                    }
+                  "
+                >
+                </ng-container>
               } @else {
                 {{
                   resolveBodyCellContent(col?.body?.bodyCellContent, row, data)

@@ -90,11 +90,8 @@
 
   <transaction-pdf-invoice-tax-and-totals
     [taxDetails]="invoiceData.taxDetails"
+    [taxSummary]="invoiceData.taxSummary"
   />
-  <!-- [taxSummary]="invoiceData.taxSummary"
-  [subtotal]="invoiceData.subtotal"
-  [totalVat]="invoiceData.totalVat"
-  [totalAmount]="invoiceData.totalAmount" -->
 
   <transaction-pdf-invoice-instalment-breakdown
     [invoiceInstallmentTableData]="invoiceData.installments"

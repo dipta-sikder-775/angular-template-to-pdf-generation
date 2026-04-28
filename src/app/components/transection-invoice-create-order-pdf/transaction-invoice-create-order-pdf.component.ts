@@ -200,6 +200,29 @@ export class TransactionInvoiceCreateOrderPDF {
       },
     ],
 
+    // 5-2 tax summary
+    taxSummary: [
+      {
+        // subtotal: '40.00',
+        // totalVat: '8.00',
+        // totalAmount: '48.00',
+        label: 'Subtotal',
+        value: '£40.00',
+      },
+      {
+        label: 'Total Vat (Excl)',
+        value: '£8.00',
+      },
+      {
+        label: 'Total Paid',
+        value: '£8.00',
+      },
+      {
+        label: 'Total Amount',
+        value: '£48.00',
+      },
+    ],
+
     // accountNo: '56766666520',
 
     stockType: 'kiosk',
@@ -233,9 +256,9 @@ export class TransactionInvoiceCreateOrderPDF {
       },
     ],
 
-    subtotal: '40.00',
-    totalVat: '8.00',
-    totalAmount: '48.00',
+    // subtotal: '40.00',
+    // totalVat: '8.00',
+    // totalAmount: '48.00',
     installments: [
       { date: '10-04-2026', due: '33.60', status: 'Pending' },
       { date: '17-04-2026', due: '43.20', status: 'Pending' },

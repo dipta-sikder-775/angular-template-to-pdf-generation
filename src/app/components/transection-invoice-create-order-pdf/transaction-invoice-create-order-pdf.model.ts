@@ -1,12 +1,12 @@
 import { IBusinessLogoData } from './transaction-pdf-invoice-business-logo/transaction-pdf-invoice-business-logo.model';
 import { IInvoiceSummaryData } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.model';
 
-export interface TransactionInvoiceAddressDetails {
+export interface ITransactionInvoiceAddressDetails {
   name: string;
   address: string[];
 }
 
-export interface TransactionInvoiceLineItem {
+export interface ITransactionInvoiceLineItem {
   img?: string;
   description: string;
   sku?: string;
@@ -16,7 +16,7 @@ export interface TransactionInvoiceLineItem {
   amount: string;
 }
 
-export interface TransactionInvoiceTaxDetailsRow {
+export interface ITransactionInvoiceTaxDetailsRow {
   rate: string | number | null | undefined;
   goods: string | number | null | undefined;
   vatAmount: string | number | null | undefined;
@@ -24,13 +24,13 @@ export interface TransactionInvoiceTaxDetailsRow {
   total: string | number | null | undefined;
 }
 
-export interface TransactionInvoiceInstalment {
+export interface ITransactionInvoiceInstalment {
   date: string;
   due: string;
   status: string;
 }
 
-export interface TransactionInvoiceBankDetails {
+export interface ITransactionInvoiceBankDetails {
   accountName: string;
   accountNo: string;
   sortCode: string;
@@ -38,6 +38,17 @@ export interface TransactionInvoiceBankDetails {
   intermediaryBic: string;
   iban: string;
 }
+
+export interface ITaxSummaryRow {
+  label: string | number;
+  value: string | number | null | undefined;
+}
+
+// export interface ITaxSummaryRow {
+//   subtotal: string | null | undefined;
+//   totalVat: string | null | undefined;
+//   totalAmount?: string | null | undefined;
+// }
 
 export interface TransactionInvoiceCreateOrderPdfData {
   // row 1: Invoice basic info start
@@ -54,11 +65,11 @@ export interface TransactionInvoiceCreateOrderPdfData {
   /* ----------------------------------------------------- */
 
   // 2-1. supplier details
-  supplier?: TransactionInvoiceAddressDetails | null | undefined;
+  supplier?: ITransactionInvoiceAddressDetails | null | undefined;
   // 2-2. bill to details
-  billTo?: TransactionInvoiceAddressDetails | null | undefined;
+  billTo?: ITransactionInvoiceAddressDetails | null | undefined;
   // 2-3. delivery to details
-  deliverTo?: TransactionInvoiceAddressDetails | null | undefined;
+  deliverTo?: ITransactionInvoiceAddressDetails | null | undefined;
 
   /* ----------------------------------------------------- */
 
@@ -76,17 +87,18 @@ export interface TransactionInvoiceCreateOrderPdfData {
     | undefined;
 
   // 5-1 tax details
-  taxDetails?: TransactionInvoiceTaxDetailsRow[] | null | undefined;
+  taxDetails?: ITransactionInvoiceTaxDetailsRow[] | null | undefined;
 
   // 5-2. tax summary
+  taxSummary?: ITaxSummaryRow[] | null | undefined;
+  // subtotal: string | number | null | undefined;
+  // totalVat: string | number | null | undefined;
+  // totalAmount?: string | number | null | undefined;
 
   stockType: string;
-  items: TransactionInvoiceLineItem[];
-  // taxSummary: TransactionInvoiceTaxSummaryRow[];
-  subtotal: string;
-  totalVat: string;
-  installments: TransactionInvoiceInstalment[];
-  bank: TransactionInvoiceBankDetails;
+  items: ITransactionInvoiceLineItem[];
+  // taxSummary: ITransactionInvoiceTaxSummaryRow[];
+  installments: ITransactionInvoiceInstalment[];
+  bank: ITransactionInvoiceBankDetails;
   footerNote: string;
-  totalAmount?: string | null | undefined;
 }

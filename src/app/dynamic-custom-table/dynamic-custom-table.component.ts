@@ -1,5 +1,5 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { Component, Input, Type } from '@angular/core';
 import {
   ICellProps,
   ICustomDynamicTableColumn,
@@ -13,7 +13,7 @@ import {
 @Component({
   selector: 'dynamic-custom-table',
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CommonModule],
   templateUrl: './dynamic-custom-table.component.html',
 })
 export class DynamicCustomTableComponent<T extends TGenericExtends> {
@@ -112,18 +112,39 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
     row: T | null | undefined,
     loopData: ILoopData,
   ): TStyle<T> {
+    console.log('style compute');
     return typeof style === 'function' ? style(row, loopData) : style;
   }
 
-  resolveBodyTemplate(
-    props: ICellProps<T>['customTemplate'],
-    row: T | null | undefined,
-    data: T[] | null | undefined,
-  ) {
-    if (typeof props === 'function') {
-      return props(row, data);
+  // resolveBodyTemplate(
+  //   props: ICellProps<T>['customTemplate'],
+  //   row: T | null | undefined,
+  //   data: T[] | null | undefined,
+  // ) {
+  //   if (typeof props === 'function') {
+  //     return props(row, data);
+  //   }
+  //   return props;
+  // }
+
+  private isComponentClass(type: any): boolean {
+    // Simple check to see if it's a constructor (Class) vs a plain function
+    return typeof type === 'function' && /^\s*class\s+/.test(type.toString());
+  }
+
+  getComponent(componentProp: any, row: T): Type<any> | null {
+    if (!componentProp) return null;
+
+    // If it's a function but NOT a class (arrow function/callback)
+    if (
+      typeof componentProp === 'function' &&
+      !this.isComponentClass(componentProp)
+    ) {
+      return componentProp(row, this.data);
     }
-    return props;
+
+    // It's a direct Component Class
+    return componentProp;
   }
 
   resolveBodyCellContent(
