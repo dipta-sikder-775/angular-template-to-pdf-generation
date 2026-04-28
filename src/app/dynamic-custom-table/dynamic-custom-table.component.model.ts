@@ -36,6 +36,7 @@ export interface ICellProps<T extends TGenericExtends> {
     | ((
         row: T | null | undefined,
         data: T[] | null | undefined,
+        loopData: ILoopData,
       ) => TRenderableValue);
   /**
    * Allows for a custom template to be used for the cell instead of the default text rendering. Can be a static TemplateRef or a function that returns a TemplateRef based on the row data and loop context.

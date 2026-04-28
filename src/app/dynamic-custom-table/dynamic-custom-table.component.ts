@@ -151,9 +151,10 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
     props: ICellProps<T>['bodyCellContent'],
     row: T | null | undefined,
     data: T[] | null | undefined,
+    loopData: ILoopData,
   ) {
     if (typeof props === 'function') {
-      return props(row, data);
+      return props(row, data, loopData);
     }
     return props;
   }

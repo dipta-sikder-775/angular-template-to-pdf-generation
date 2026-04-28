@@ -153,7 +153,19 @@
                 </ng-container>
               } @else {
                 {{
-                  resolveBodyCellContent(col?.body?.bodyCellContent, row, data)
+                  resolveBodyCellContent(
+                    col?.body?.bodyCellContent,
+                    row,
+                    data,
+                    {
+                      index: rowIndex,
+                      count: rowCount,
+                      isFirstItem: isFirst,
+                      isLastItem: isLast,
+                      isEven: isEven,
+                      isOdd: isOdd,
+                    }
+                  )
                 }}
               }
             </td>

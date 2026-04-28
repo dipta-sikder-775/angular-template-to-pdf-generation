@@ -4,7 +4,7 @@ import {
 } from '../../../dynamic-custom-table/dynamic-custom-table.component.model';
 import { ITransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
 
-export const TAX_SUMMARY_TABLE_STYLES: {
+export const ITEMS_TABLE_STYLES: {
   tableStyle: TSimpleStyle;
   tableHeadRowStyle: TSimpleStyle;
   tableBodyRowStyle: TSimpleStyle;
@@ -25,7 +25,7 @@ export const TAX_SUMMARY_TABLE_STYLES: {
   },
 };
 
-export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceLineItem>[] =
+export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceLineItem>[] =
   [
     {
       header: {
@@ -38,7 +38,8 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         },
       },
       body: {
-        bodyCellContent: (data) => data?.img,
+        bodyCellContent: (row, data, loopData) =>
+          loopData?.isFirstItem ? 'Kiosk' : '',
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
         style: {
@@ -63,7 +64,7 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         },
       },
       body: {
-        bodyCellContent: (data) => data?.quantity,
+        bodyCellContent: (row) => row?.quantity,
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
@@ -81,7 +82,7 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         },
       },
       body: {
-        bodyCellContent: (data) => data?.unitPrice,
+        bodyCellContent: (row) => row?.unitPrice,
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
@@ -99,7 +100,7 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         },
       },
       body: {
-        bodyCellContent: (data) => data?.vat,
+        bodyCellContent: (row) => row?.vat,
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
@@ -117,7 +118,7 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         },
       },
       body: {
-        bodyCellContent: (data) => data?.amount,
+        bodyCellContent: (row) => row?.amount,
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
