@@ -14,6 +14,7 @@ export interface ITransactionInvoiceLineItem {
   unitPrice: string;
   vat: string;
   amount: string;
+  label?: string;
 }
 
 export interface ITransactionInvoiceTaxDetailsRow {

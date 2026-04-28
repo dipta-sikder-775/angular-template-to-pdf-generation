@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { DynamicCustomTableComponent } from '../../../dynamic-custom-table/dynamic-custom-table.component';
 import { ITransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
-import { DynamicCustomTableComponent } from "../../../dynamic-custom-table/dynamic-custom-table.component";
+import { ITEMS_TABLE_COLUMNS } from './transaction-pdf-invoice-items-table.component.model';
 
 @Component({
   selector: 'transaction-pdf-invoice-items-table',
@@ -18,4 +19,12 @@ export class TransactionPDFInvoiceItemsTable {
     style: Partial<CSSStyleDeclaration>;
     label: string | number;
   } | null = null;
+
+  get itemsTableColumn() {
+    return ITEMS_TABLE_COLUMNS;
+  }
+
+  get itemsTableData() {
+    return this.items;
+  }
 }

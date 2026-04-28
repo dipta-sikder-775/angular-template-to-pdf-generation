@@ -124,3 +124,5 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceL
       },
     },
   ];
+
+// export const SAMPLE_ITEMS_TABLE_DATA: ITransactionInvoiceLineItem[] = []
