@@ -32,7 +32,7 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         key: crypto.randomUUID(),
         style: {
           padding: '0',
-        }
+        },
       },
     },
   ];

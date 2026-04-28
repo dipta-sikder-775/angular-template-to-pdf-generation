@@ -168,6 +168,37 @@ export class TransactionInvoiceCreateOrderPDF {
       },
     ],
 
+    // 4-1 items breakdown
+    stockType: 'kiosk',
+    items: [
+      {
+        img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+        description: 'k small (1 pack X 20 unit) (case)',
+        sku: '000109343968305',
+        quantity: 4,
+        unitPrice: '10.00',
+        vat: '20%',
+        amount: '40.00',
+      },
+      {
+        img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+        description: 'k small (1 pack X 20 unit) (case)',
+        sku: '000109343968305',
+        quantity: 4,
+        unitPrice: '10.00',
+        vat: '20%',
+        amount: '40.00',
+      },
+      {
+        description: 'k small (1 pack X 20 unit) (case)',
+        sku: '000109343968305',
+        quantity: 4,
+        unitPrice: '10.00',
+        vat: '20%',
+        amount: '40.00',
+      },
+    ],
+
     // 5-1 tax details
     taxDetails: [
       {
@@ -223,42 +254,7 @@ export class TransactionInvoiceCreateOrderPDF {
       },
     ],
 
-    // accountNo: '56766666520',
-
-    stockType: 'kiosk',
-
-    items: [
-      {
-        img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
-        description: 'k small (1 pack X 20 unit) (case)',
-        sku: '000109343968305',
-        quantity: 4,
-        unitPrice: '10.00',
-        vat: '20%',
-        amount: '40.00',
-      },
-      {
-        img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
-        description: 'k small (1 pack X 20 unit) (case)',
-        sku: '000109343968305',
-        quantity: 4,
-        unitPrice: '10.00',
-        vat: '20%',
-        amount: '40.00',
-      },
-      {
-        description: 'k small (1 pack X 20 unit) (case)',
-        sku: '000109343968305',
-        quantity: 4,
-        unitPrice: '10.00',
-        vat: '20%',
-        amount: '40.00',
-      },
-    ],
-
-    // subtotal: '40.00',
-    // totalVat: '8.00',
-    // totalAmount: '48.00',
+    // 6-1 instalment breakdown
     installments: [
       { date: '10-04-2026', due: '33.60', status: 'Pending' },
       { date: '17-04-2026', due: '43.20', status: 'Pending' },
@@ -269,6 +265,7 @@ export class TransactionInvoiceCreateOrderPDF {
       { date: '22-05-2026', due: '43.20', status: 'Pending' },
       { date: '29-05-2026', due: '43.20', status: 'Pending' },
     ],
+
     bank: {
       accountName: 'Yotech',
       accountNo: '15',
