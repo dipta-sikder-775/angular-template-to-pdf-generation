@@ -59,6 +59,6 @@ export interface ICellProps<T extends TGenericExtends> {
 }
 
 export interface ICustomDynamicTableColumn<T extends TGenericExtends> {
-  header: Omit<ICellProps<T>, 'bodyCellContent'>;
+  header?: Omit<ICellProps<T>, 'bodyCellContent'>;
   body: Omit<ICellProps<T>, 'headerCellContent'>;
 }

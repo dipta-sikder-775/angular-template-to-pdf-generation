@@ -1,32 +1,33 @@
-<table [class]="tableClass" [style]="tableStyle">
-  <thead [class]="tableHeadClass" [style]="tableHeadStyle">
-    <tr [class]="tableHeadRowClass" [style]="tableHeadRowStyle">
-      @for (col of tableColumn; track $index) {
-        <th
-          [class]="
-            resolveStyle(col?.header?.class, null, {
-              index: $index,
-              count: $count,
-              isFirstItem: $first,
-              isLastItem: $last,
-              isEven: $even,
-              isOdd: $odd,
-            })
-          "
-          [style]="
-            resolveStyle(col?.header?.style, null, {
-              index: $index,
-              count: $count,
-              isFirstItem: $first,
-              isLastItem: $last,
-              isEven: $even,
-              isOdd: $odd,
-            })
-          "
-          [attr.colspan]="col?.header?.colspan"
-          [attr.rowspan]="col?.header?.rowspan"
-        >
-          <!-- @if (col?.header?.customTemplate) {
+@if (tableColumn.length) {
+  <table [class]="tableClass" [style]="tableStyle">
+    <thead [class]="tableHeadClass" [style]="tableHeadStyle">
+      <tr [class]="tableHeadRowClass" [style]="tableHeadRowStyle">
+        @for (col of tableColumn; track $index) {
+          <th
+            [class]="
+              resolveStyle(col?.header?.class, null, {
+                index: $index,
+                count: $count,
+                isFirstItem: $first,
+                isLastItem: $last,
+                isEven: $even,
+                isOdd: $odd,
+              })
+            "
+            [style]="
+              resolveStyle(col?.header?.style, null, {
+                index: $index,
+                count: $count,
+                isFirstItem: $first,
+                isLastItem: $last,
+                isEven: $even,
+                isOdd: $odd,
+              })
+            "
+            [attr.colspan]="col?.header?.colspan"
+            [attr.rowspan]="col?.header?.rowspan"
+          >
+            <!-- @if (col?.header?.customTemplate) {
             <ng-container
               *ngTemplateOutlet="
                 col?.header?.customTemplate;
@@ -46,84 +47,85 @@
             }}
           } -->
 
-          @if (col?.header?.customTemplate) {
-            <ng-container
-              *ngTemplateOutlet="
-                col?.header?.customTemplate;
-                context: {
-                  $implicit: data,
-                  loop: {
-                    index: $index,
-                    count: $count,
-                    isFirstItem: $first,
-                    isLastItem: $last,
-                    isEven: $even,
-                    isOdd: $odd,
-                  },
-                }
-              "
-            >
-            </ng-container>
-          } @else {
-            {{
-              resolveHeaderCellContent(col?.header, data, {
-                index: $index,
-                count: $count,
-                isFirstItem: $first,
-                isLastItem: $last,
-                isEven: $even,
-                isOdd: $odd,
-              })
-            }}
-          }
-        </th>
-      }
-    </tr>
-  </thead>
-
-  <tbody [class]="tableBodyClass" [style]="tableBodyStyle">
-    @for (row of tableData; track $index) {
-      <tr [class]="tableBodyRowClass" [style]="tableBodyRowStyle">
-        @for (col of tableColumn; track $index) {
-          <td
-            [class]="
-              resolveStyle(col?.body?.class, row, {
-                index: $index,
-                count: $count,
-                isFirstItem: $first,
-                isLastItem: $last,
-                isEven: $even,
-                isOdd: $odd,
-              })
-            "
-            [style]="
-              resolveStyle(col?.body?.style, row, {
-                index: $index,
-                count: $count,
-                isFirstItem: $first,
-                isLastItem: $last,
-                isEven: $even,
-                isOdd: $odd,
-              })
-            "
-            [attr.colspan]="col?.body?.colspan"
-            [attr.rowspan]="col?.body?.rowspan"
-          >
-            @if (col?.body?.customTemplate) {
+            @if (col?.header?.customTemplate) {
               <ng-container
                 *ngTemplateOutlet="
-                  resolveBodyTemplate(col?.body?.customTemplate, row, data);
-                  context: { $implicit: row }
+                  col?.header?.customTemplate;
+                  context: {
+                    $implicit: data,
+                    loop: {
+                      index: $index,
+                      count: $count,
+                      isFirstItem: $first,
+                      isLastItem: $last,
+                      isEven: $even,
+                      isOdd: $odd,
+                    },
+                  }
                 "
-              ></ng-container>
+              >
+              </ng-container>
             } @else {
               {{
-                resolveBodyCellContent(col?.body?.bodyCellContent, row, data)
+                resolveHeaderCellContent(col?.header, data, {
+                  index: $index,
+                  count: $count,
+                  isFirstItem: $first,
+                  isLastItem: $last,
+                  isEven: $even,
+                  isOdd: $odd,
+                })
               }}
             }
-          </td>
+          </th>
         }
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+
+    <tbody [class]="tableBodyClass" [style]="tableBodyStyle">
+      @for (row of tableData; track $index) {
+        <tr [class]="tableBodyRowClass" [style]="tableBodyRowStyle">
+          @for (col of tableColumn; track $index) {
+            <td
+              [class]="
+                resolveStyle(col?.body?.class, row, {
+                  index: $index,
+                  count: $count,
+                  isFirstItem: $first,
+                  isLastItem: $last,
+                  isEven: $even,
+                  isOdd: $odd,
+                })
+              "
+              [style]="
+                resolveStyle(col?.body?.style, row, {
+                  index: $index,
+                  count: $count,
+                  isFirstItem: $first,
+                  isLastItem: $last,
+                  isEven: $even,
+                  isOdd: $odd,
+                })
+              "
+              [attr.colspan]="col?.body?.colspan"
+              [attr.rowspan]="col?.body?.rowspan"
+            >
+              @if (col?.body?.customTemplate) {
+                <ng-container
+                  *ngTemplateOutlet="
+                    resolveBodyTemplate(col?.body?.customTemplate, row, data);
+                    context: { $implicit: row }
+                  "
+                ></ng-container>
+              } @else {
+                {{
+                  resolveBodyCellContent(col?.body?.bodyCellContent, row, data)
+                }}
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+}
