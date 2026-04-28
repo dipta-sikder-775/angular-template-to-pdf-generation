@@ -4,7 +4,7 @@ import { ITaxSummaryRow } from '../../transaction-invoice-create-order-pdf.model
 
 @Component({
   standalone: true,
-  selector: 'app-template-component',
+  selector: 'tax-summary-cell-template',
   template: `
     <div
       style="display: flex; justify-content: space-between; margin: 0; padding: 0"
@@ -27,7 +27,7 @@ import { ITaxSummaryRow } from '../../transaction-invoice-create-order-pdf.model
     </div>
   `,
 })
-export class TemplateComponent {
+export class TaxSummaryCellTemplateComponent {
   // These names MUST match the keys in the 'inputs' object above
   @Input() row: ITaxSummaryRow | undefined;
   @Input() data: ITaxSummaryRow[] | undefined;

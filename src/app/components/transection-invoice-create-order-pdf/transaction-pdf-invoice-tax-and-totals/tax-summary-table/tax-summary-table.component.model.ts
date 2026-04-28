@@ -3,7 +3,7 @@ import {
   TSimpleStyle,
 } from '../../../../dynamic-custom-table/dynamic-custom-table.component.model';
 import { ITransactionInvoiceTaxDetailsRow } from '../../transaction-invoice-create-order-pdf.model';
-import { TemplateComponent } from './template-component.component';
+import { TaxSummaryCellTemplateComponent } from './template-component.component';
 
 export const TAX_SUMMARY_TABLE_STYLES: {
   tableStyle: TSimpleStyle;
@@ -28,8 +28,11 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
     {
       body: {
         bodyCellContent: (data) => data?.rate,
-        component: TemplateComponent,
+        component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
+        style: {
+          padding: '0',
+        }
       },
     },
   ];
