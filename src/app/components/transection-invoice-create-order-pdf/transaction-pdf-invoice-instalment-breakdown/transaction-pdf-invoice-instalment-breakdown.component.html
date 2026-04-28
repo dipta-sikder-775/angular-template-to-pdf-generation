@@ -1,4 +1,4 @@
-@if (installments.length) {
+@if (invoiceInstallmentTableData?.length) {
   <div style="margin-bottom: 30px">
     <p
       style="
@@ -13,7 +13,19 @@
       Instalment Breakdown
     </p>
 
-    <table style="width: 55%; border-collapse: collapse">
+    <dynamic-custom-table
+      [columns]="invoiceInstallmentTableColumn"
+      [data]="invoiceInstallmentTableData"
+      [tableStyle]="{ width: '55%', borderCollapse: 'collapse' }"
+      [tableHeadRowStyle]="{
+        borderBottom: '1px solid #333',
+        textAlign: 'left',
+        fontSize: '13px',
+      }"
+      [tableBodyRowStyle]="{ borderBottom: '1px solid #f0f0f0' }"
+    />
+
+    <!-- <table style="width: 55%; border-collapse: collapse">
       <thead>
         <tr
           style="
@@ -41,6 +53,6 @@
           </tr>
         }
       </tbody>
-    </table>
+    </table> -->
   </div>
 }

@@ -88,25 +88,15 @@
     [stockType]="invoiceData.stockType"
   />
 
-  <!-- <transaction-pdf-invoice-tax-and-totals
+  <transaction-pdf-invoice-tax-and-totals
     [taxSummary]="invoiceData.taxSummary"
     [subtotal]="invoiceData.subtotal"
     [totalVat]="invoiceData.totalVat"
     [totalAmount]="invoiceData.totalAmount"
-  /> -->
-  <dynamic-custom-table
-    [columns]="tableColumns"
-    [data]="tableAssetData"
-    [tableStyle]="{ width: '55%', borderCollapse: 'collapse' }"
-    [tableHeadRowStyle]="{
-      borderBottom: '1px solid #333',
-      textAlign: 'left',
-      fontSize: '13px',
-    }"
-    [tableBodyRowStyle]="{ borderBottom: '1px solid #f0f0f0' }"
   />
+
   <transaction-pdf-invoice-instalment-breakdown
-    [installments]="invoiceData.installments"
+    [invoiceInstallmentTableData]="invoiceData.installments"
   />
 
   <transaction-pdf-invoice-payment-details
