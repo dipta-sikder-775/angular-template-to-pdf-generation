@@ -3,10 +3,10 @@ import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../../../utils/generate-html-to-pdf';
 import { DynamicCustomTableComponent } from '../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component';
+import { InvoiceBarcode } from '../../components/sales-invoice-pdf-related-components/invoice-barcode/invoice-barcode.component';
+import { TransactionPDFInvoiceBusinessLogo } from '../../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.component';
 import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
 import { TransactionPDFInvoiceAddressColumn } from './transaction-pdf-invoice-address-column/transaction-pdf-invoice-address-column.component';
-import { TransactionPDFInvoiceBarcode } from './transaction-pdf-invoice-barcode/transaction-pdf-invoice-barcode.component';
-import { TransactionPDFInvoiceBusinessLogo } from './transaction-pdf-invoice-business-logo/transaction-pdf-invoice-business-logo.component';
 import { TransactionPDFInvoiceInstalmentBreakdown } from './transaction-pdf-invoice-instalment-breakdown/transaction-pdf-invoice-instalment-breakdown.component';
 import { TransactionPDFInvoiceItemsTable } from './transaction-pdf-invoice-items-table/transaction-pdf-invoice-items-table.component';
 import { TransactionPDFInvoiceOrderTypeAmount } from './transaction-pdf-invoice-order-details/transaction-pdf-invoice-order-details.component';
@@ -21,7 +21,7 @@ import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax
   imports: [
     TransactionPDFInvoiceSummary,
     TransactionPDFInvoiceQrCode,
-    TransactionPDFInvoiceBarcode,
+    InvoiceBarcode,
     TransactionPDFInvoiceBusinessLogo,
     TransactionPDFInvoiceAddressColumn,
     TransactionPDFInvoiceOrderTypeAmount,

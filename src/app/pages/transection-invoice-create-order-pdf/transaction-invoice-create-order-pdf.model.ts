@@ -1,4 +1,4 @@
-import { IBusinessLogoData } from './transaction-pdf-invoice-business-logo/transaction-pdf-invoice-business-logo.model';
+import { IBusinessLogoData } from '../../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.model';
 import { IInvoiceSummaryData } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.model';
 
 export interface ITransactionInvoiceAddressDetails {

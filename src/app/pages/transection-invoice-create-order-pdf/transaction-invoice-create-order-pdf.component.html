@@ -29,9 +29,9 @@
 
       <transaction-pdf-invoice-qr-code [qrCodeUrl]="invoiceData.qrCodeUrl" />
 
-      <transaction-pdf-invoice-barcode [barcodeUrl]="invoiceData.barcodeUrl" />
+      <invoice-barcode [barcodeUrl]="invoiceData.barcodeUrl" />
 
-      <transaction-pdf-invoice-business-logo
+      <invoice-business-logo
         [businessLogoData]="invoiceData.businessLogoData"
       />
     </tr>
