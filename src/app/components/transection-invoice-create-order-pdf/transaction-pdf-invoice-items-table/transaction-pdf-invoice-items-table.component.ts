@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DynamicCustomTableComponent } from '../../../dynamic-custom-table/dynamic-custom-table.component';
-import { ITransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
+import { TTransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
 import { ITEMS_TABLE_COLUMNS } from './transaction-pdf-invoice-items-table.component.model';
 
 @Component({
@@ -12,7 +12,7 @@ import { ITEMS_TABLE_COLUMNS } from './transaction-pdf-invoice-items-table.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionPDFInvoiceItemsTable {
-  @Input({ required: true }) items!: readonly ITransactionInvoiceLineItem[];
+  @Input({ required: true }) items!: readonly TTransactionInvoiceLineItem[];
   @Input({ required: true }) stockType!: string;
 
   tableHeaderData: {

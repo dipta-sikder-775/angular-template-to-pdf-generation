@@ -18,48 +18,76 @@ export interface ILoopData {
 export type TSimpleStyle = string | Partial<CSSStyleDeclaration> | undefined;
 export type TStyle<T> =
   | TSimpleStyle
-  | ((
-      data: T | null | undefined,
-      loopData: ILoopData,
-    ) => string | Partial<CSSStyleDeclaration>);
+  | ((props: {
+      data: T | null | undefined;
+      loopData: ILoopData;
+    }) => string | Partial<CSSStyleDeclaration>);
 
 export interface ICellProps<T extends TGenericExtends> {
   headerCellContent:
     | TRenderableValue
-    | ((data: T[] | null | undefined, loopData: ILoopData) => TRenderableValue);
+    | ((props: {
+        data: T[] | null | undefined;
+        loopData: ILoopData;
+      }) => TRenderableValue);
 
   /**
    * The content to be rendered inside the cell. Can be a static value or a function that returns a value based on the row data and loop context. If a function is provided, it will be called with the current row data and the entire dataset, allowing for dynamic content generation based on the specific row or overall data context.
    */
   bodyCellContent:
     | TRenderableValue
-    | ((
-        row: T | null | undefined,
-        data: T[] | null | undefined,
-        loopData: ILoopData,
-      ) => TRenderableValue);
+    | ((props: {
+        row: T | null | undefined;
+        data: T[] | null | undefined;
+        loopData: ILoopData;
+      }) => TRenderableValue);
   /**
    * Allows for a custom template to be used for the cell instead of the default text rendering. Can be a static TemplateRef or a function that returns a TemplateRef based on the row data and loop context.
    */
   customTemplate?:
-    | ((
-        row: T | null | undefined,
-        data: T[] | null | undefined,
-      ) => TemplateRef<any>)
+    | ((props: {
+        row: T | null | undefined;
+        data: T[] | null | undefined;
+      }) => TemplateRef<any>)
     | TemplateRef<any>
     | null
     | undefined;
   component?:
     | Type<any>
-    | ((row: T | null | undefined, data: T[] | null | undefined) => Type<any>);
+    | ((props: {
+        row: T | null | undefined;
+        data: T[] | null | undefined;
+      }) => Type<any>);
   /**
    * The key to used for tracking unique content
    */
   key: string | number | ((row: T | null | undefined) => TRenderableValue);
   style?: TStyle<T>;
   class?: TStyle<T>;
-  colspan?: number;
-  rowspan?: number;
+  colspan?:
+    | number
+    | ((props: {
+        row: T | null | undefined;
+        data: T[] | null | undefined;
+        rowLoopData?: ILoopData;
+        columnLoopData?: ILoopData;
+      }) => number);
+  rowspan?:
+    | number
+    | ((props: {
+        row: T | null | undefined;
+        data: T[] | null | undefined;
+        rowLoopData?: ILoopData;
+        columnLoopData?: ILoopData;
+      }) => number);
+  skipRendering?:
+    | boolean
+    | ((props: {
+        row: T | null | undefined;
+        data: T[] | null | undefined;
+        rowLoopData?: ILoopData;
+        columnLoopData?: ILoopData;
+      }) => boolean);
 }
 
 export interface ICustomDynamicTableColumn<T extends TGenericExtends> {

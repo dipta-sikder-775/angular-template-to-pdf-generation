@@ -38,7 +38,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => data?.rate,
+        bodyCellContent: ({ row }) => row?.rate,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },
@@ -50,7 +50,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => `£${data?.goods}`,
+        bodyCellContent: ({ row }) => `£${row?.goods}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },
@@ -62,7 +62,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => `£${data?.vatAmount}`,
+        bodyCellContent: ({ row }) => `£${row?.vatAmount}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },
@@ -74,7 +74,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => `£${data?.net}`,
+        bodyCellContent: ({ row }) => `£${row?.net}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },
@@ -86,7 +86,7 @@ export const TAX_DETAILS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
         key: crypto.randomUUID(),
       },
       body: {
-        bodyCellContent: (data) => `£${data?.total}`,
+        bodyCellContent: ({ row }) => `£${row?.total}`,
         style: { padding: '8px 5px' },
         key: crypto.randomUUID(),
       },

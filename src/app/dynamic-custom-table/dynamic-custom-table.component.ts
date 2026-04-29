@@ -53,24 +53,31 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
   }
 
   // Resolves the 'content' for headers (handles string or function)
-  resolveHeaderCellContent(
-    props: ICustomDynamicTableColumn<T>['header'] | undefined | null,
-    currentData: T[] | null | undefined,
-    loopData: ILoopData,
-  ): TRenderableValue {
+  resolveHeaderCellContent({
+    currentData,
+    loopData,
+    header,
+  }: {
+    header: ICustomDynamicTableColumn<T>['header'] | undefined | null;
+    currentData: T[] | null | undefined;
+    loopData: ILoopData;
+  }): TRenderableValue {
     // Early return if props?.headerCellContent is not defined, to avoid unnecessary processing and potential errors
     if (
-      typeof props?.headerCellContent === 'undefined' ||
-      props?.headerCellContent === null
+      typeof header?.headerCellContent === 'undefined' ||
+      header?.headerCellContent === null
     ) {
       return null;
     }
 
-    if (typeof props?.headerCellContent === 'function') {
-      return props.headerCellContent?.(currentData, loopData);
+    if (typeof header?.headerCellContent === 'function') {
+      return header.headerCellContent?.({
+        data: currentData,
+        loopData,
+      });
     }
 
-    return props?.headerCellContent;
+    return header?.headerCellContent;
   }
 
   resolveRowKey(row: unknown) {
@@ -107,13 +114,22 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
   /**
    * Handles TStyle (string vs Object) for [class] and [style]
    */
-  resolveStyle(
-    style: TStyle<T>,
-    row: T | null | undefined,
-    loopData: ILoopData,
-  ): TStyle<T> {
+  resolveStyle({
+    loopData,
+    row,
+    style,
+  }: {
+    style: TStyle<T>;
+    row: T | null | undefined;
+    loopData: ILoopData;
+  }): TStyle<T> {
     console.log('style compute');
-    return typeof style === 'function' ? style(row, loopData) : style;
+    return typeof style === 'function'
+      ? style({
+          data: row,
+          loopData,
+        })
+      : style;
   }
 
   // resolveBodyTemplate(
@@ -127,7 +143,7 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
   //   return props;
   // }
 
-  private isComponentClass(type: any): boolean {
+  private isComponentClass(type: unknown): boolean {
     // Simple check to see if it's a constructor (Class) vs a plain function
     return typeof type === 'function' && /^\s*class\s+/.test(type.toString());
   }
@@ -147,15 +163,61 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
     return componentProp;
   }
 
-  resolveBodyCellContent(
-    props: ICellProps<T>['bodyCellContent'],
-    row: T | null | undefined,
-    data: T[] | null | undefined,
-    loopData: ILoopData,
-  ) {
-    if (typeof props === 'function') {
-      return props(row, data, loopData);
+  resolveBodyCellContent({
+    data,
+    loopData,
+    bodyCellContent,
+    row,
+  }: {
+    bodyCellContent: ICellProps<T>['bodyCellContent'];
+    row: T | null | undefined;
+    data: T[] | null | undefined;
+    loopData: ILoopData;
+  }) {
+    if (typeof bodyCellContent === 'function') {
+      return bodyCellContent({
+        data,
+        row,
+        loopData,
+      });
     }
-    return props;
+    return bodyCellContent;
+  }
+
+  resolveSkipRendering(props: {
+    skipRendering: ICellProps<T>['skipRendering'];
+    row: T | null | undefined;
+    data: T[] | null | undefined;
+    rowLoopData: ILoopData;
+    colLoopData: ILoopData;
+  }): boolean {
+    if (typeof props.skipRendering === 'function') {
+      return props.skipRendering({
+        row: props.row,
+        data: props.data,
+        rowLoopData: props.rowLoopData,
+        columnLoopData: props.colLoopData,
+      });
+    }
+    return !!props.skipRendering;
+  }
+
+  resolveRowOrColSpan(props: {
+    span: ICellProps<T>['rowspan'] | ICellProps<T>['colspan'];
+    row: T | null | undefined;
+    data: T[] | null | undefined;
+    rowLoopData: ILoopData;
+    colLoopData: ILoopData;
+  }): number | undefined {
+    if (typeof props.span === 'function') {
+      return props.span({
+        row: props.row,
+        data: props.data,
+        rowLoopData: props.rowLoopData,
+        columnLoopData: props.colLoopData,
+      });
+    }
+
+    return props.span;
   }
 }

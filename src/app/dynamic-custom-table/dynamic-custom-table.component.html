@@ -5,23 +5,31 @@
         @for (col of tableColumn; track col?.header?.key) {
           <th
             [class]="
-              resolveStyle(col?.header?.class, null, {
-                index: $index,
-                count: $count,
-                isFirstItem: $first,
-                isLastItem: $last,
-                isEven: $even,
-                isOdd: $odd,
+              resolveStyle({
+                style: col?.header?.class,
+                row: null,
+                loopData: {
+                  index: $index,
+                  count: $count,
+                  isFirstItem: $first,
+                  isLastItem: $last,
+                  isEven: $even,
+                  isOdd: $odd,
+                },
               })
             "
             [style]="
-              resolveStyle(col?.header?.style, null, {
-                index: $index,
-                count: $count,
-                isFirstItem: $first,
-                isLastItem: $last,
-                isEven: $even,
-                isOdd: $odd,
+              resolveStyle({
+                row: null,
+                style: col?.header?.style,
+                loopData: {
+                  index: $index,
+                  count: $count,
+                  isFirstItem: $first,
+                  isLastItem: $last,
+                  isEven: $even,
+                  isOdd: $odd,
+                },
               })
             "
             [attr.colspan]="col?.header?.colspan"
@@ -67,13 +75,17 @@
               </ng-container>
             } @else {
               {{
-                resolveHeaderCellContent(col?.header, data, {
-                  index: $index,
-                  count: $count,
-                  isFirstItem: $first,
-                  isLastItem: $last,
-                  isEven: $even,
-                  isOdd: $odd,
+                resolveHeaderCellContent({
+                  header: col?.header,
+                  currentData: data,
+                  loopData: {
+                    index: $index,
+                    count: $count,
+                    isFirstItem: $first,
+                    isLastItem: $last,
+                    isEven: $even,
+                    isOdd: $odd,
+                  },
                 })
               }}
             }
@@ -95,31 +107,106 @@
       ) {
         <tr [class]="tableBodyRowClass" [style]="tableBodyRowStyle">
           @for (col of tableColumn; track col?.header?.key) {
-            <td
-              [class]="
-                resolveStyle(col?.body?.class, row, {
+            @if (
+              !resolveSkipRendering({
+                skipRendering: col?.body?.skipRendering,
+                row: row,
+                data: data,
+                rowLoopData: {
+                  index: rowIndex,
+                  count: rowCount,
+                  isFirstItem: isFirst,
+                  isLastItem: isLast,
+                  isEven: isEven,
+                  isOdd: isOdd,
+                },
+                colLoopData: {
                   index: $index,
                   count: $count,
                   isFirstItem: $first,
                   isLastItem: $last,
                   isEven: $even,
                   isOdd: $odd,
-                })
-              "
-              [style]="
-                resolveStyle(col?.body?.style, row, {
-                  index: $index,
-                  count: $count,
-                  isFirstItem: $first,
-                  isLastItem: $last,
-                  isEven: $even,
-                  isOdd: $odd,
-                })
-              "
-              [attr.colspan]="col?.body?.colspan"
-              [attr.rowspan]="col?.body?.rowspan"
-            >
-              <!-- @if (col?.body?.customTemplate) {
+                },
+              })
+            ) {
+              <td
+                [class]="
+                  resolveStyle({
+                    row,
+                    style: col?.body?.class,
+                    loopData: {
+                      index: $index,
+                      count: $count,
+                      isFirstItem: $first,
+                      isLastItem: $last,
+                      isEven: $even,
+                      isOdd: $odd,
+                    },
+                  })
+                "
+                [style]="
+                  resolveStyle({
+                    row,
+                    style: col?.body?.class,
+                    loopData: {
+                      index: $index,
+                      count: $count,
+                      isFirstItem: $first,
+                      isLastItem: $last,
+                      isEven: $even,
+                      isOdd: $odd,
+                    },
+                  })
+                "
+                [attr.colspan]="
+                  resolveRowOrColSpan({
+                    span: col?.body?.colspan,
+                    row: row,
+                    data: data,
+                    rowLoopData: {
+                      index: rowIndex,
+                      count: rowCount,
+                      isFirstItem: isFirst,
+                      isLastItem: isLast,
+                      isEven: isEven,
+                      isOdd: isOdd,
+                    },
+                    colLoopData: {
+                      index: $index,
+                      count: $count,
+                      isFirstItem: $first,
+                      isLastItem: $last,
+                      isEven: $even,
+                      isOdd: $odd,
+                    },
+                  })
+                "
+                [attr.rowspan]="
+                  resolveRowOrColSpan({
+                    span: col?.body?.rowspan,
+                    row: row,
+                    data: data,
+                    rowLoopData: {
+                      index: rowIndex,
+                      count: rowCount,
+                      isFirstItem: isFirst,
+                      isLastItem: isLast,
+                      isEven: isEven,
+                      isOdd: isOdd,
+                    },
+                    colLoopData: {
+                      index: $index,
+                      count: $count,
+                      isFirstItem: $first,
+                      isLastItem: $last,
+                      isEven: $even,
+                      isOdd: $odd,
+                    },
+                  })
+                "
+              >
+                <!-- @if (col?.body?.customTemplate) {
                 <ng-container
                   *ngTemplateOutlet="
                     resolveBodyTemplate(col?.body?.customTemplate, row, data);
@@ -132,14 +219,32 @@
                 }}
               } -->
 
-              @if (getComponent(col?.body?.component, row)) {
-                <ng-container
-                  *ngComponentOutlet="
-                    getComponent(col.body.component, row);
-                    inputs: {
-                      row: row,
-                      data: data,
-                      loop: {
+                @if (getComponent(col?.body?.component, row)) {
+                  <ng-container
+                    *ngComponentOutlet="
+                      getComponent(col.body.component, row);
+                      inputs: {
+                        row: row,
+                        data: data,
+                        loop: {
+                          index: rowIndex,
+                          count: rowCount,
+                          isFirstItem: isFirst,
+                          isLastItem: isLast,
+                          isEven: isEven,
+                          isOdd: isOdd,
+                        },
+                      }
+                    "
+                  >
+                  </ng-container>
+                } @else {
+                  {{
+                    resolveBodyCellContent({
+                      data,
+                      row,
+                      bodyCellContent: col?.body?.bodyCellContent,
+                      loopData: {
                         index: rowIndex,
                         count: rowCount,
                         isFirstItem: isFirst,
@@ -147,28 +252,11 @@
                         isEven: isEven,
                         isOdd: isOdd,
                       },
-                    }
-                  "
-                >
-                </ng-container>
-              } @else {
-                {{
-                  resolveBodyCellContent(
-                    col?.body?.bodyCellContent,
-                    row,
-                    data,
-                    {
-                      index: rowIndex,
-                      count: rowCount,
-                      isFirstItem: isFirst,
-                      isLastItem: isLast,
-                      isEven: isEven,
-                      isOdd: isOdd,
-                    }
-                  )
-                }}
-              }
-            </td>
+                    })
+                  }}
+                }
+              </td>
+            }
           }
         </tr>
       }

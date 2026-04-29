@@ -15,7 +15,7 @@ export const INVOICE_INSTALLMENT_TABLE_COLUMN: ICustomDynamicTableColumn<ITransa
           padding: '6px 5px',
           fontSize: '13px',
         },
-        bodyCellContent: (row) => row?.date || 'N/A',
+        bodyCellContent: ({ row }) => row?.date || 'N/A',
       },
     },
     {
@@ -26,7 +26,7 @@ export const INVOICE_INSTALLMENT_TABLE_COLUMN: ICustomDynamicTableColumn<ITransa
       },
       body: {
         key: (row) => row?.due ?? 'N/A',
-        bodyCellContent: (row) => `£${row?.due ?? 'N/A'}`,
+        bodyCellContent: ({ row }) => `£${row?.due ?? 'N/A'}`,
         style: {
           padding: '6px 5px',
           fontSize: '13px',
@@ -41,9 +41,7 @@ export const INVOICE_INSTALLMENT_TABLE_COLUMN: ICustomDynamicTableColumn<ITransa
       },
       body: {
         key: 'status',
-        bodyCellContent(data, loopData) {
-          return data?.status;
-        },
+        bodyCellContent: ({ row }) => row?.status,
         style: {
           padding: '6px 5px',
           fontSize: '13px',

@@ -6,16 +6,21 @@ export interface ITransactionInvoiceAddressDetails {
   address: string[];
 }
 
-export interface ITransactionInvoiceLineItem {
-  img?: string;
-  description: string;
-  sku?: string;
-  quantity: number | string;
-  unitPrice: string;
-  vat: string;
-  amount: string;
-  label?: string;
-}
+export type TTransactionInvoiceLineItem =
+  | {
+      type: 'data';
+      img?: string;
+      description: string;
+      sku?: string;
+      quantity: number | string;
+      unitPrice: string;
+      vat: string;
+      amount: string;
+    }
+  | {
+      type: 'label';
+      label?: string;
+    };
 
 export interface ITransactionInvoiceTaxDetailsRow {
   rate: string | number | null | undefined;
@@ -97,7 +102,7 @@ export interface TransactionInvoiceCreateOrderPdfData {
   // totalAmount?: string | number | null | undefined;
 
   stockType: string;
-  items: ITransactionInvoiceLineItem[];
+  items: TTransactionInvoiceLineItem[];
   // taxSummary: ITransactionInvoiceTaxSummaryRow[];
   installments: ITransactionInvoiceInstalment[];
   bank: ITransactionInvoiceBankDetails;

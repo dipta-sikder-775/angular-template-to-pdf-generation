@@ -171,7 +171,9 @@ export class TransactionInvoiceCreateOrderPDF {
     // 4-1 items breakdown
     stockType: 'kiosk',
     items: [
+      { type: 'label', label: 'Items' },
       {
+        type: 'data',
         img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
         description: 'k small (1 pack X 20 unit) (case)',
         sku: '000109343968305',
@@ -181,6 +183,7 @@ export class TransactionInvoiceCreateOrderPDF {
         amount: '40.00',
       },
       {
+        type: 'data',
         img: 'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
         description: 'k small (1 pack X 20 unit) (case)',
         sku: '000109343968305',
@@ -190,6 +193,7 @@ export class TransactionInvoiceCreateOrderPDF {
         amount: '40.00',
       },
       {
+        type: 'data',
         description: 'k small (1 pack X 20 unit) (case)',
         sku: '000109343968305',
         quantity: 4,

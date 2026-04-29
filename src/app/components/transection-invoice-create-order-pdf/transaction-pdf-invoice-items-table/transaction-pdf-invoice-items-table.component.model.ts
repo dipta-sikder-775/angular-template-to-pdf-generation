@@ -2,7 +2,7 @@ import {
   ICustomDynamicTableColumn,
   TSimpleStyle,
 } from '../../../dynamic-custom-table/dynamic-custom-table.component.model';
-import { ITransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
+import { TTransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
 
 export const ITEMS_TABLE_STYLES: {
   tableStyle: TSimpleStyle;
@@ -25,7 +25,7 @@ export const ITEMS_TABLE_STYLES: {
   },
 };
 
-export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceLineItem>[] =
+export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceLineItem>[] =
   [
     {
       header: {
@@ -38,17 +38,48 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceL
         },
       },
       body: {
-        bodyCellContent: (row, data, loopData) =>
-          loopData?.isFirstItem ? 'Kiosk' : '',
-        // component: TaxSummaryCellTemplateComponent,
-        key: crypto.randomUUID(),
-        style: {
-          padding: '8px 5px',
-          textAlign: 'right',
-          width: '80px',
-          fontWeight: '700',
-          fontSize: '12px',
+        bodyCellContent: ({ row }) => {
+          if (!row) {
+            return null;
+          }
+
+          if (row.type === 'data') {
+            return row.description;
+          }
+
+          if (row.type === 'label') {
+            return row.label;
+          }
+
+          return null;
         },
+        key: crypto.randomUUID(),
+        style: ({ data: row }) => {
+          if (row?.type === 'label') {
+            return {
+              padding: '10px 5px 4px 5px',
+              fontWeight: '700',
+              fontSize: '12px',
+            };
+          }
+          // style="padding: 10px 5px 4px 5px; font-weight: bold; font-size: 12px"
+          return {
+            padding: '8px 5px',
+            textAlign: 'right',
+            width: '80px',
+            fontWeight: '700',
+            fontSize: '12px',
+          };
+        },
+        colspan({ row }) {
+          if (row?.type === 'label') {
+            return 5;
+          }
+          return 1;
+        },
+        // skipRendering({ row }) {
+        //   return row?.type === 'data';
+        // },
       },
     },
     {
@@ -64,7 +95,12 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceL
         },
       },
       body: {
-        bodyCellContent: (row) => row?.quantity,
+        bodyCellContent: ({ row }) => {
+          if (row?.type === 'data') {
+            return row.quantity;
+          }
+          return null;
+        },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
@@ -82,7 +118,12 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceL
         },
       },
       body: {
-        bodyCellContent: (row) => row?.unitPrice,
+        bodyCellContent: ({ row }) => {
+          if (row?.type === 'data') {
+            return row.unitPrice;
+          }
+          return null;
+        },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
@@ -100,7 +141,12 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceL
         },
       },
       body: {
-        bodyCellContent: (row) => row?.vat,
+        bodyCellContent: ({ row }) => {
+          if (row?.type === 'data') {
+            return row.vat;
+          }
+          return null;
+        },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
@@ -118,11 +164,16 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionInvoiceL
         },
       },
       body: {
-        bodyCellContent: (row) => row?.amount,
+        bodyCellContent: ({ row }) => {
+          if (row?.type === 'data') {
+            return row.amount;
+          }
+          return null;
+        },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
       },
     },
   ];
 
-// export const SAMPLE_ITEMS_TABLE_DATA: ITransactionInvoiceLineItem[] = []
+// export const SAMPLE_ITEMS_TABLE_DATA: TTransactionInvoiceLineItem[] = []

@@ -95,4 +95,17 @@
   </tbody>
 </table> -->
 
-<dynamic-custom-table [columns]="itemsTableColumn" [data]="itemsTableData"  />
+<dynamic-custom-table
+  [columns]="itemsTableColumn"
+  [data]="itemsTableData"
+  [tableStyle]="{
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginBottom: '25px',
+  }"
+  [tableHeadRowStyle]="{
+    borderBottom: '1px solid #333',
+    textAlign: 'left',
+    color: '#333',
+  }"
+/>
