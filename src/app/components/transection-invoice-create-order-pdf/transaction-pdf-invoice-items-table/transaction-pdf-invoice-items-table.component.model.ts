@@ -3,25 +3,32 @@ import {
   TSimpleStyle,
 } from '../../../dynamic-custom-table/dynamic-custom-table.component.model';
 import { TTransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
+import { ItemDescriptionCellComponent } from './item-description-cell.component';
 
 export const ITEMS_TABLE_STYLES: {
-  tableStyle: TSimpleStyle;
-  tableHeadRowStyle: TSimpleStyle;
-  tableBodyRowStyle: TSimpleStyle;
+  // tableStyle: TSimpleStyle;
+  // tableHeadRowStyle: TSimpleStyle;
+  // tableBodyRowStyle: TSimpleStyle;
+  tableBodyRowTdStyle: TSimpleStyle;
 } = {
-  tableStyle: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    marginBottom: '25px',
-  },
-  tableHeadRowStyle: {
-    borderBottom: '1px solid #333',
-    textAlign: 'left',
-    color: '#333',
-  },
-  tableBodyRowStyle: {
-    fontSize: '13px',
-    borderBottom: '1px solid #eee',
+  // tableStyle: {
+  //   width: '100%',
+  //   borderCollapse: 'collapse',
+  //   marginBottom: '25px',
+  // },
+  // tableHeadRowStyle: {
+  //   borderBottom: '1px solid #333',
+  //   textAlign: 'left',
+  //   color: '#333',
+  // },
+  // tableBodyRowStyle: {
+  //   fontSize: '13px',
+  //   borderBottom: '1px solid #eee',
+  // },
+  tableBodyRowTdStyle: {
+    padding: '8px 5px',
+    textAlign: 'right',
+    fontSize: '12px',
   },
 };
 
@@ -53,6 +60,10 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
 
           return null;
         },
+        component(props) {
+          const { row } = props;
+          return ItemDescriptionCellComponent;
+        },
         key: crypto.randomUUID(),
         style: ({ data: row }) => {
           if (row?.type === 'label') {
@@ -65,10 +76,6 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
           // style="padding: 10px 5px 4px 5px; font-weight: bold; font-size: 12px"
           return {
             padding: '8px 5px',
-            textAlign: 'right',
-            width: '80px',
-            fontWeight: '700',
-            fontSize: '12px',
           };
         },
         colspan({ row }) {
@@ -103,6 +110,7 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
+        style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
       },
     },
     {
@@ -126,6 +134,7 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
+        style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
       },
     },
     {
@@ -149,6 +158,7 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
+        style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
       },
     },
     {
@@ -172,6 +182,7 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
+        style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
       },
     },
   ];
