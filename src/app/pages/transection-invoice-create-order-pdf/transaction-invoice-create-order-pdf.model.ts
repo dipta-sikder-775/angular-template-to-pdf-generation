@@ -1,5 +1,5 @@
 import { IBusinessLogoData } from '../../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.model';
-import { IInvoiceSummaryData } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.model';
+import { IInvoiceSummaryData } from '../../components/sales-invoice-pdf-related-components/invoice-summary/invoice-summary.model';
 
 export interface ITransactionInvoiceAddressDetails {
   name: string;

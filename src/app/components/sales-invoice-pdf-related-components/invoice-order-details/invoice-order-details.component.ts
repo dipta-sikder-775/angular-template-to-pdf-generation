@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IOrderDetailsItem } from './transaction-pdf-invoice-order-details.model';
+import { IOrderDetailsItem } from './invoice-order-details.model';
 
 @Component({
-  selector: 'transaction-pdf-invoice-order-details',
+  selector: 'invoice-order-details',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './transaction-pdf-invoice-order-details.component.html',
-  styleUrl: './transaction-pdf-invoice-order-details.component.scss',
+  templateUrl: './invoice-order-details.component.html',
+  styleUrl: './invoice-order-details.component.scss',
 })
 export class TransactionPDFInvoiceOrderTypeAmount {
   @Input({ required: false }) orderDetails?:

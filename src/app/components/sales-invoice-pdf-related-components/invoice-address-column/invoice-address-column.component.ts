@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'transaction-pdf-invoice-address-column',
+  selector: 'invoice-address-column',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './transaction-pdf-invoice-address-column.component.html',
-  styleUrl: './transaction-pdf-invoice-address-column.component.scss',
+  templateUrl: './invoice-address-column.component.html',
+  styleUrl: './invoice-address-column.component.scss',
 })
 export class TransactionPDFInvoiceAddressColumn {
   @Input({ required: true }) title: string | number | null | undefined;

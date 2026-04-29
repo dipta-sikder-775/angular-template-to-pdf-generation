@@ -23,9 +23,7 @@
     "
   >
     <tr>
-      <transaction-pdf-invoice-summary
-        [invoiceSummaryData]="invoiceData.invoiceSummaryData"
-      />
+      <invoice-summary [invoiceSummaryData]="invoiceData.invoiceSummaryData" />
 
       <invoice-qr-code [qrCodeUrl]="invoiceData.qrCodeUrl" />
 
@@ -48,7 +46,7 @@
   >
     <tr>
       @if (invoiceData.supplier) {
-        <transaction-pdf-invoice-address-column
+        <invoice-address-column
           [title]="invoiceData.supplier.name"
           [description]="invoiceData.supplier.address"
           [isFirstItem]="true"
@@ -57,7 +55,7 @@
       }
 
       @if (invoiceData.billTo) {
-        <transaction-pdf-invoice-address-column
+        <invoice-address-column
           title="Bill To"
           [name]="invoiceData.billTo.name"
           [description]="invoiceData.billTo.address"
@@ -67,7 +65,7 @@
       }
 
       @if (invoiceData.deliverTo) {
-        <transaction-pdf-invoice-address-column
+        <invoice-address-column
           title="Deliver To"
           [name]="invoiceData.deliverTo.name"
           [description]="invoiceData.deliverTo.address"
@@ -79,9 +77,7 @@
   </table>
 
   <!-- ORDER TYPE & AMOUNT DUE -->
-  <transaction-pdf-invoice-order-details
-    [orderDetails]="invoiceData.orderDetails"
-  />
+  <invoice-order-details [orderDetails]="invoiceData.orderDetails" />
 
   <transaction-pdf-invoice-items-table
     [items]="invoiceData.items"
