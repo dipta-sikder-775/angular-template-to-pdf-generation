@@ -142,10 +142,10 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
   //   return props;
   // }
 
-  private isComponentClass(type: unknown): boolean {
-    // Simple check to see if it's a constructor (Class) vs a plain function
-    return typeof type === 'function' && /^\s*class\s+/.test(type.toString());
-  }
+  // private isComponentClass(type: unknown): boolean {
+  //   // Simple check to see if it's a constructor (Class) vs a plain function
+  //   return typeof type === 'function' && /^\s*class\s+/.test(type.toString());
+  // }
 
   getComponent(
     componentProp: ICellProps<T>['component'],
@@ -164,7 +164,7 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
         data: this.data,
       });
       if (res?.type === 'renderComponent') {
-        return res.result || null;
+        return res.result ?? null;
       }
       return null;
     }
