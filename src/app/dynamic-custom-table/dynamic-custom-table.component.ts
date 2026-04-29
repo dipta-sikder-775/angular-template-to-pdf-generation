@@ -123,7 +123,6 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
     row: T | null | undefined;
     loopData: ILoopData;
   }): TStyle<T> {
-    console.log('style compute');
     return typeof style === 'function'
       ? style({
           data: row,
@@ -148,19 +147,28 @@ export class DynamicCustomTableComponent<T extends TGenericExtends> {
     return typeof type === 'function' && /^\s*class\s+/.test(type.toString());
   }
 
-  getComponent(componentProp: any, row: T): Type<any> | null {
-    if (!componentProp) return null;
-
-    // If it's a function but NOT a class (arrow function/callback)
-    if (
-      typeof componentProp === 'function' &&
-      !this.isComponentClass(componentProp)
-    ) {
-      return componentProp(row, this.data);
+  getComponent(
+    componentProp: ICellProps<T>['component'],
+    row: T | null | undefined,
+  ): Type<any> | null {
+    if (!componentProp) {
+      return null;
     }
 
-    // It's a direct Component Class
-    return componentProp;
+    if (typeof componentProp === 'function') {
+      const res: {
+        result: Type<any> | null | undefined;
+        type: 'renderComponent' | 'doNotRenderComponent';
+      } = (componentProp as any)?.({
+        row,
+        data: this.data,
+      });
+      if (res?.type === 'renderComponent') {
+        return res.result || null;
+      }
+      return null;
+    }
+    return null;
   }
 
   resolveBodyCellContent({

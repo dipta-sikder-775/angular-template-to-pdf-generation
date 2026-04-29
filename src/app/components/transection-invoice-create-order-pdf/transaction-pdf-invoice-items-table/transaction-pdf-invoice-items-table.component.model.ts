@@ -60,9 +60,19 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
 
           return null;
         },
-        component(props) {
-          const { row } = props;
-          return ItemDescriptionCellComponent;
+        component({ row }) {
+          console.log("🚀 ~ row?.type === 'label':", row?.type === 'label')
+          if (row?.type === 'label') {
+            return {
+              result: null,
+              type: 'doNotRenderComponent',
+            };
+          }
+          // return null;
+          return {
+            type: 'renderComponent',
+            result: ItemDescriptionCellComponent,
+          };
         },
         key: crypto.randomUUID(),
         style: ({ data: row }) => {
