@@ -11,7 +11,7 @@ import { TransactionPDFInvoiceInstalmentBreakdown } from './transaction-pdf-invo
 import { TransactionPDFInvoiceItemsTable } from './transaction-pdf-invoice-items-table/transaction-pdf-invoice-items-table.component';
 import { TransactionPDFInvoiceOrderTypeAmount } from './transaction-pdf-invoice-order-details/transaction-pdf-invoice-order-details.component';
 import { TransactionPDFInvoicePaymentDetails } from './transaction-pdf-invoice-payment-details/transaction-pdf-invoice-payment-details.component';
-import { TransactionPDFInvoiceQrCode } from './transaction-pdf-invoice-qr-code/transaction-pdf-invoice-qr-code.component';
+import { TransactionPDFInvoiceQrCode } from './invoice-qr-code/invoice-qr-code.component';
 import { TransactionPDFInvoiceSummary } from './transaction-pdf-invoice-summary/transaction-pdf-invoice-summary.component';
 import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax-and-totals/transaction-pdf-invoice-tax-and-totals.component';
 
