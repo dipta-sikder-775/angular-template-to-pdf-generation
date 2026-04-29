@@ -1,7 +1,7 @@
 import {
   ICustomDynamicTableColumn,
   TSimpleStyle,
-} from '../../../dynamic-custom-table/dynamic-custom-table.component.model';
+} from '../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component.model';
 import { TTransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
 import { ItemDescriptionCellComponent } from './item-description-cell.component';
 

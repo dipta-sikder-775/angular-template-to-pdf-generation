@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DynamicCustomTableComponent } from '../../../../dynamic-custom-table/dynamic-custom-table.component';
+import { DynamicCustomTableComponent } from '../../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component';
 import { ITransactionInvoiceTaxDetailsRow } from '../../transaction-invoice-create-order-pdf.model';
 import {
   TAX_DETAILS_TABLE_COLUMNS,

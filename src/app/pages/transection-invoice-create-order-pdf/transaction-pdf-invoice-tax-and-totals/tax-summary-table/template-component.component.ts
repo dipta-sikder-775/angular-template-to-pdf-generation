@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ILoopData } from '../../../../dynamic-custom-table/dynamic-custom-table.component.model';
+import { ILoopData } from '../../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component.model';
 import { ITaxSummaryRow } from '../../transaction-invoice-create-order-pdf.model';
 
 @Component({

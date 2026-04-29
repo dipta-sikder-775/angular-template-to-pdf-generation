@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../../../utils/generate-html-to-pdf';
-import { DynamicCustomTableComponent } from '../../dynamic-custom-table/dynamic-custom-table.component';
+import { DynamicCustomTableComponent } from '../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component';
 import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
 import { TransactionPDFInvoiceAddressColumn } from './transaction-pdf-invoice-address-column/transaction-pdf-invoice-address-column.component';
 import { TransactionPDFInvoiceBarcode } from './transaction-pdf-invoice-barcode/transaction-pdf-invoice-barcode.component';
