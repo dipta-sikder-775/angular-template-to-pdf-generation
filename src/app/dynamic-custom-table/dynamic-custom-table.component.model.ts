@@ -53,7 +53,6 @@ export interface ICellProps<T extends TGenericExtends> {
    * Allows for a custom angular component to be used for the cell instead of the default text rendering. Can be a static TemplateRef or a function that returns a TemplateRef based on the row data and loop context.
    */
   component?:
-    | Type<any>
     | null
     | undefined
     | ((props: { row: T | null | undefined; data: T[] | null | undefined }) => {

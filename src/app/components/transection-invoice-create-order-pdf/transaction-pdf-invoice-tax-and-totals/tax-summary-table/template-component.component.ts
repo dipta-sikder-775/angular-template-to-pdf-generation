@@ -29,9 +29,9 @@ import { ITaxSummaryRow } from '../../transaction-invoice-create-order-pdf.model
 })
 export class TaxSummaryCellTemplateComponent {
   // These names MUST match the keys in the 'inputs' object above
-  @Input() row: ITaxSummaryRow | undefined;
-  @Input() data: ITaxSummaryRow[] | undefined;
-  @Input() loop: ILoopData | undefined;
+  @Input() row: ITaxSummaryRow | null | undefined;
+  @Input() data: ITaxSummaryRow[] | null | undefined;
+  @Input() loop: ILoopData | null | undefined;
 
   watchInputs() {
     console.log('Row data:', this.row);

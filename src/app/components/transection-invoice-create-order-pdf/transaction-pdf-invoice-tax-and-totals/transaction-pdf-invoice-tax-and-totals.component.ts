@@ -25,7 +25,4 @@ export class TransactionPDFInvoiceTaxAndTotals {
   taxDetails!: readonly ITransactionInvoiceTaxDetailsRow[] | null | undefined;
   @Input({ required: false })
   taxSummary!: readonly ITaxSummaryRow[] | null | undefined;
-  // @Input({ required: true }) subtotal!: string;
-  // @Input({ required: true }) totalVat!: string;
-  // @Input({ required: true }) totalAmount!: string;
 }

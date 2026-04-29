@@ -61,7 +61,6 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
           return null;
         },
         component({ row }) {
-          console.log("🚀 ~ row?.type === 'label':", row?.type === 'label')
           if (row?.type === 'label') {
             return {
               result: null,
@@ -78,9 +77,10 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         style: ({ data: row }) => {
           if (row?.type === 'label') {
             return {
-              padding: '10px 5px 4px 5px',
+              padding: '10px 5px 10px 5px',
               fontWeight: '700',
               fontSize: '12px',
+              backgroundColor: '#fafafa',
             };
           }
           // style="padding: 10px 5px 4px 5px; font-weight: bold; font-size: 12px"
@@ -118,9 +118,11 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
           }
           return null;
         },
-        // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
+        skipRendering({ row }) {
+          return row?.type === 'label';
+        },
       },
     },
     {
@@ -142,9 +144,11 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
           }
           return null;
         },
-        // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
+        skipRendering({ row }) {
+          return row?.type === 'label';
+        },
       },
     },
     {
@@ -166,9 +170,11 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
           }
           return null;
         },
-        // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
+        skipRendering({ row }) {
+          return row?.type === 'label';
+        },
       },
     },
     {
@@ -190,9 +196,11 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
           }
           return null;
         },
-        // component: TaxSummaryCellTemplateComponent,
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
+        skipRendering({ row }) {
+          return row?.type === 'label';
+        },
       },
     },
   ];

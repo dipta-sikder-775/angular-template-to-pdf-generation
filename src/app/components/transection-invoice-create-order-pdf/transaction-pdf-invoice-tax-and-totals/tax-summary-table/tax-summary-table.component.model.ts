@@ -28,7 +28,12 @@ export const TAX_SUMMARY_TABLE_COLUMNS: ICustomDynamicTableColumn<ITransactionIn
     {
       body: {
         bodyCellContent: ({ row }) => row?.rate,
-        component: TaxSummaryCellTemplateComponent,
+        component: ({ row }) => {
+          return {
+            result: TaxSummaryCellTemplateComponent,
+            type: 'renderComponent',
+          };
+        },
         key: crypto.randomUUID(),
         style: {
           padding: '0',
