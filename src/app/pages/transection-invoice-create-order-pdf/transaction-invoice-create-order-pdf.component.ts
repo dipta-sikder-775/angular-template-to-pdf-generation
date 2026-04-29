@@ -3,15 +3,15 @@ import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../../../utils/generate-html-to-pdf';
 import { DynamicCustomTableComponent } from '../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component';
-import { InvoiceBarcode } from '../../components/sales-invoice-pdf-related-components/invoice-barcode/invoice-barcode.component';
-import { TransactionPDFInvoiceBusinessLogo } from '../../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.component';
-import { TransactionPDFInvoiceQrCode } from '../../components/sales-invoice-pdf-related-components/invoice-qr-code/invoice-qr-code.component';
-import { TransactionPDFInvoiceSummary } from '../../components/sales-invoice-pdf-related-components/invoice-summary/invoice-summary.component';
+import { InvoiceAddressColumnComponent } from '../../components/sales-invoice-pdf-related-components/invoice-address-column/invoice-address-column.component';
+import { InvoiceBarcodeComponent } from '../../components/sales-invoice-pdf-related-components/invoice-barcode/invoice-barcode.component';
+import { InvoiceBusinessLogoComponent } from '../../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.component';
+import { InvoiceOrderDetailsComponent } from '../../components/sales-invoice-pdf-related-components/invoice-order-details/invoice-order-details.component';
+import { InvoiceQrCodeComponent } from '../../components/sales-invoice-pdf-related-components/invoice-qr-code/invoice-qr-code.component';
+import { InvoiceSummaryComponent } from '../../components/sales-invoice-pdf-related-components/invoice-summary/invoice-summary.component';
 import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
-import { TransactionPDFInvoiceAddressColumn } from '../../components/sales-invoice-pdf-related-components/invoice-address-column/invoice-address-column.component';
 import { TransactionPDFInvoiceInstalmentBreakdown } from './transaction-pdf-invoice-instalment-breakdown/transaction-pdf-invoice-instalment-breakdown.component';
 import { TransactionPDFInvoiceItemsTable } from './transaction-pdf-invoice-items-table/transaction-pdf-invoice-items-table.component';
-import { TransactionPDFInvoiceOrderTypeAmount } from '../../components/sales-invoice-pdf-related-components/invoice-order-details/invoice-order-details.component';
 import { TransactionPDFInvoicePaymentDetails } from './transaction-pdf-invoice-payment-details/transaction-pdf-invoice-payment-details.component';
 import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax-and-totals/transaction-pdf-invoice-tax-and-totals.component';
 
@@ -19,12 +19,12 @@ import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax
   selector: 'transaction-invoice-create-order-pdf',
   standalone: true,
   imports: [
-    TransactionPDFInvoiceSummary,
-    TransactionPDFInvoiceQrCode,
-    InvoiceBarcode,
-    TransactionPDFInvoiceBusinessLogo,
-    TransactionPDFInvoiceAddressColumn,
-    TransactionPDFInvoiceOrderTypeAmount,
+    InvoiceSummaryComponent,
+    InvoiceQrCodeComponent,
+    InvoiceBarcodeComponent,
+    InvoiceBusinessLogoComponent,
+    InvoiceAddressColumnComponent,
+    InvoiceOrderDetailsComponent,
     TransactionPDFInvoiceItemsTable,
     TransactionPDFInvoiceTaxAndTotals,
     TransactionPDFInvoiceInstalmentBreakdown,

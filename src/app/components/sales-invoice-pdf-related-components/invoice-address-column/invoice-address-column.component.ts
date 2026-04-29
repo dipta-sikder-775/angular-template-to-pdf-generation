@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './invoice-address-column.component.html',
   styleUrl: './invoice-address-column.component.scss',
 })
-export class TransactionPDFInvoiceAddressColumn {
+export class InvoiceAddressColumnComponent {
   @Input({ required: true }) title: string | number | null | undefined;
   @Input({ required: false }) name: string | null | undefined;
   @Input({ required: true }) description:

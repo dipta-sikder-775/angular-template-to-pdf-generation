@@ -9,7 +9,7 @@ import { IOrderDetailsItem } from './invoice-order-details.model';
   templateUrl: './invoice-order-details.component.html',
   styleUrl: './invoice-order-details.component.scss',
 })
-export class TransactionPDFInvoiceOrderTypeAmount {
+export class InvoiceOrderDetailsComponent {
   @Input({ required: false }) orderDetails?:
     | IOrderDetailsItem[]
     | null

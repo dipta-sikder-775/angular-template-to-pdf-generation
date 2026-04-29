@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DynamicCustomTableComponent } from '../../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component';
-import { ITaxSummaryRow } from '../../transaction-invoice-create-order-pdf.model';
+import { ITaxSummaryRow } from '../../../pages/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.model';
+import { DynamicCustomTableComponent } from '../dynamic-custom-table/dynamic-custom-table.component';
 import {
   TAX_SUMMARY_TABLE_COLUMNS,
   TAX_SUMMARY_TABLE_STYLES,
-} from './tax-summary-table.component.model';
+} from './invoice-tax-summary-table.component.model';
 
 @Component({
-  selector: 'tax-summary-table',
+  selector: 'invoice-tax-summary-table',
   standalone: true,
   imports: [CommonModule, DynamicCustomTableComponent],
-  templateUrl: './tax-summary-table.component.html',
+  templateUrl: './invoice-tax-summary-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaxSummaryTableComponent {
+export class InvoiceTaxSummaryTableComponent {
   @Input({ required: false })
   taxSummary!: readonly ITaxSummaryRow[] | null | undefined;
 

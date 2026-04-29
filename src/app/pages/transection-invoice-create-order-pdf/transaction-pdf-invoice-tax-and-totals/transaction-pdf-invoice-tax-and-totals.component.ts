@@ -1,21 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DynamicCustomTableComponent } from '../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component';
+import { InvoiceTaxDetailsTableComponent } from '../../../components/sales-invoice-pdf-related-components/invoice-tax-details-table/invoice-tax-details-table.component';
+import { InvoiceTaxSummaryTableComponent } from '../../../components/sales-invoice-pdf-related-components/invoice-tax-summary-table/invoice-tax-summary-table.component';
 import {
   ITaxSummaryRow,
   ITransactionInvoiceTaxDetailsRow,
 } from '../transaction-invoice-create-order-pdf.model';
-import { TaxDetailsTableComponent } from './tax-details-table/tax-details-table.component';
-import { TaxSummaryTableComponent } from './tax-summary-table/tax-summary-table.component';
 
 @Component({
   selector: 'transaction-pdf-invoice-tax-and-totals',
   standalone: true,
   imports: [
     CommonModule,
-    DynamicCustomTableComponent,
-    TaxDetailsTableComponent,
-    TaxSummaryTableComponent,
+    InvoiceTaxDetailsTableComponent,
+    InvoiceTaxSummaryTableComponent,
   ],
   templateUrl: './transaction-pdf-invoice-tax-and-totals.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

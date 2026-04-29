@@ -9,6 +9,6 @@ import { IInvoiceSummaryData } from './invoice-summary.model';
   templateUrl: './invoice-summary.component.html',
   styleUrl: './invoice-summary.component.scss',
 })
-export class TransactionPDFInvoiceSummary {
+export class InvoiceSummaryComponent {
   @Input({ required: true }) invoiceSummaryData!: IInvoiceSummaryData;
 }

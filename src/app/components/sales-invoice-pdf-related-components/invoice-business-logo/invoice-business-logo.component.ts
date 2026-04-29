@@ -9,7 +9,7 @@ import { IBusinessLogoData } from './invoice-business-logo.model';
   templateUrl: './invoice-business-logo.component.html',
   styleUrl: './invoice-business-logo.component.scss',
 })
-export class TransactionPDFInvoiceBusinessLogo {
+export class InvoiceBusinessLogoComponent {
   // config = inject(Config);
   @Input({ required: true }) businessLogoData!: IBusinessLogoData;
   private readonly logoTimestamp = Date.now();

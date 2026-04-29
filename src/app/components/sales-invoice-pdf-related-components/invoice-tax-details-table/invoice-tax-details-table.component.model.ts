@@ -1,8 +1,8 @@
+import { ITransactionInvoiceTaxDetailsRow } from '../../../pages/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.model';
 import {
   ICustomDynamicTableColumn,
   TSimpleStyle,
-} from '../../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component.model';
-import { ITransactionInvoiceTaxDetailsRow } from '../../transaction-invoice-create-order-pdf.model';
+} from '../dynamic-custom-table/dynamic-custom-table.component.model';
 
 const tableHeaderStyle: NonNullable<
   ICustomDynamicTableColumn<ITransactionInvoiceTaxDetailsRow>['header']

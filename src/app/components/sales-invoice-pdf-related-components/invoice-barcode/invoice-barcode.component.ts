@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './invoice-barcode.component.html',
   styleUrl: './invoice-barcode.component.scss',
 })
-export class InvoiceBarcode {
+export class InvoiceBarcodeComponent {
   @Input({ required: true }) barcodeUrl!: string;
 }
