@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../utils/generate-html-to-pdf';
-import { TransactionInvoiceCreateOrderPDF } from './components/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.component';
 import { InvoiceCreateOrderV2PDF } from './experimental-pages/invoice-create-order-v2-pdf';
+import { TransactionInvoiceCreateOrderPDF } from './pages/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.component';
 
 @Component({
   selector: 'app-root',
