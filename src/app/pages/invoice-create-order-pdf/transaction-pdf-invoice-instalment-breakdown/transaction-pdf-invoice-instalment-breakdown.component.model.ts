@@ -1,5 +1,5 @@
 import { ICustomDynamicTableColumn } from '../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component.model';
-import { ITransactionInvoiceInstalment } from '../transaction-invoice-create-order-pdf.model';
+import { ITransactionInvoiceInstalment } from '../invoice-create-order-pdf.model';
 
 export const INVOICE_INSTALLMENT_TABLE_COLUMN: ICustomDynamicTableColumn<ITransactionInvoiceInstalment>[] =
   [

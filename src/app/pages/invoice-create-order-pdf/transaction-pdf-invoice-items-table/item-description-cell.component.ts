@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ILoopData } from '../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component.model';
-import { TTransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
+import { TTransactionInvoiceLineItem } from '../invoice-create-order-pdf.model';
 
 @Component({
   selector: 'item-description-cell',

@@ -2,7 +2,7 @@ import {
   ICustomDynamicTableColumn,
   TSimpleStyle,
 } from '../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component.model';
-import { TTransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
+import { TTransactionInvoiceLineItem } from '../invoice-create-order-pdf.model';
 import { ItemDescriptionCellComponent } from './item-description-cell.component';
 
 export const ITEMS_TABLE_STYLES: {

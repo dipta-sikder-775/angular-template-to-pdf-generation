@@ -9,14 +9,14 @@ import { InvoiceBusinessLogoComponent } from '../../components/sales-invoice-pdf
 import { InvoiceOrderDetailsComponent } from '../../components/sales-invoice-pdf-related-components/invoice-order-details/invoice-order-details.component';
 import { InvoiceQrCodeComponent } from '../../components/sales-invoice-pdf-related-components/invoice-qr-code/invoice-qr-code.component';
 import { InvoiceSummaryComponent } from '../../components/sales-invoice-pdf-related-components/invoice-summary/invoice-summary.component';
-import { TransactionInvoiceCreateOrderPdfData } from './transaction-invoice-create-order-pdf.model';
+import { TransactionInvoiceCreateOrderPdfData } from './invoice-create-order-pdf.model';
 import { TransactionPDFInvoiceInstalmentBreakdown } from './transaction-pdf-invoice-instalment-breakdown/transaction-pdf-invoice-instalment-breakdown.component';
 import { TransactionPDFInvoiceItemsTable } from './transaction-pdf-invoice-items-table/transaction-pdf-invoice-items-table.component';
 import { TransactionPDFInvoicePaymentDetails } from './transaction-pdf-invoice-payment-details/transaction-pdf-invoice-payment-details.component';
 import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax-and-totals/transaction-pdf-invoice-tax-and-totals.component';
 
 @Component({
-  selector: 'transaction-invoice-create-order-pdf',
+  selector: 'invoice-create-order-pdf',
   standalone: true,
   imports: [
     InvoiceSummaryComponent,
@@ -31,9 +31,9 @@ import { TransactionPDFInvoiceTaxAndTotals } from './transaction-pdf-invoice-tax
     TransactionPDFInvoicePaymentDetails,
     DynamicCustomTableComponent,
   ],
-  templateUrl: './transaction-invoice-create-order-pdf.component.html',
+  templateUrl: './invoice-create-order-pdf.component.html',
 })
-export class TransactionInvoiceCreateOrderPDF {
+export class InvoiceCreateOrderPDFComponent {
   @ViewChild('transactionPDFInvoiceContainer', { static: false })
   invoiceElement!: ElementRef;
   isLoading = false;

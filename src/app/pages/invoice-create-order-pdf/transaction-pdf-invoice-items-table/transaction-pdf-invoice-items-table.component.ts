@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DynamicCustomTableComponent } from '../../../components/sales-invoice-pdf-related-components/dynamic-custom-table/dynamic-custom-table.component';
-import { TTransactionInvoiceLineItem } from '../transaction-invoice-create-order-pdf.model';
+import { TTransactionInvoiceLineItem } from '../invoice-create-order-pdf.model';
 import { ITEMS_TABLE_COLUMNS } from './transaction-pdf-invoice-items-table.component.model';
 
 @Component({

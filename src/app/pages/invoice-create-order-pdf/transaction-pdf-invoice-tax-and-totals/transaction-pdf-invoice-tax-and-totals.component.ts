@@ -5,7 +5,7 @@ import { InvoiceTaxSummaryTableComponent } from '../../../components/sales-invoi
 import {
   ITaxSummaryRow,
   ITransactionInvoiceTaxDetailsRow,
-} from '../transaction-invoice-create-order-pdf.model';
+} from '../invoice-create-order-pdf.model';
 
 @Component({
   selector: 'transaction-pdf-invoice-tax-and-totals',

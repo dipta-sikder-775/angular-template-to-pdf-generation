@@ -3,12 +3,12 @@ import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../utils/generate-html-to-pdf';
 import { InvoiceCreateOrderV2PDF } from './experimental-pages/invoice-create-order-v2-pdf';
-import { TransactionInvoiceCreateOrderPDF } from './pages/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.component';
+import { InvoiceCreateOrderPDFComponent } from './pages/invoice-create-order-pdf/invoice-create-order-pdf.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [InvoiceCreateOrderV2PDF, TransactionInvoiceCreateOrderPDF],
+  imports: [InvoiceCreateOrderV2PDF, InvoiceCreateOrderPDFComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
