@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { InvoiceAddressColumnComponent } from '../components/sales-invoice-pdf-related-components/invoice-address-column/invoice-address-column.component';
 import { InvoiceBarcodeComponent } from '../components/sales-invoice-pdf-related-components/invoice-barcode/invoice-barcode.component';
 import { InvoiceBusinessLogoComponent } from '../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.component';
+import { InvoiceItemQtyCheckTableComponent } from '../components/sales-invoice-pdf-related-components/invoice-item-qty-check-table';
 import { InvoiceOrderDetailsComponent } from '../components/sales-invoice-pdf-related-components/invoice-order-details/invoice-order-details.component';
 import { InvoiceQrCodeComponent } from '../components/sales-invoice-pdf-related-components/invoice-qr-code/invoice-qr-code.component';
 import { InvoiceSummaryComponent } from '../components/sales-invoice-pdf-related-components/invoice-summary/invoice-summary.component';
@@ -18,6 +19,7 @@ import { InvoiceSummaryComponent } from '../components/sales-invoice-pdf-related
     InvoiceBusinessLogoComponent,
     InvoiceAddressColumnComponent,
     InvoiceOrderDetailsComponent,
+    InvoiceItemQtyCheckTableComponent,
   ],
   template: `
     <div
@@ -70,78 +72,7 @@ import { InvoiceSummaryComponent } from '../components/sales-invoice-pdf-related
       <!-- ORDER TYPE & AMOUNT DUE -->
       <invoice-order-details [orderDetails]="invoiceData.orderDetails" />
 
-      <table style="width: 100%; border-collapse: collapse;">
-        <thead>
-          <tr style="border-bottom: 1px solid #ddd; text-align: left;  ">
-            <th style="padding: 10px 5px; font-weight: 600; font-size:12px;">
-              Description
-            </th>
-            <th
-              style="padding: 10px 5px; text-align: center; width: 80px; font-weight: 600; font-size:12px;"
-            >
-              Quantity
-            </th>
-            <th
-              style="padding: 10px 5px; text-align: center; width: 80px; font-weight: 600; font-size:12px;"
-            >
-              Check
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td colspan="3" style="padding: 10px 5px 5px 5px; font-size:13px;">
-              <strong>Groceries :</strong>
-            </td>
-          </tr>
-
-          <!-- *ngFor="let item of invoiceData.items; let i = index" -->
-          @for (item of invoiceData.items; track item) {
-            <tr style="border-bottom: 1px solid #f9f9f9;">
-              <td style="padding: 12px 5px; font-size:13px;">
-                <div
-                  style="font-size: 13px; display:flex; gap:8px; align-items:center"
-                >
-                  <img
-                    *ngIf="item?.img"
-                    style="height:30px;  border-radius:4px"
-                    [src]="item?.img"
-                    alt=""
-                  />
-                  {{ item.description }}
-                </div>
-              </td>
-
-              <td
-                style="padding: 12px 5px; text-align: center; font-size:13px;"
-              >
-                {{ item.quantity }}
-              </td>
-
-              <td
-                style="padding: 12px 5px; text-align: center; font-size:13px;"
-              >
-                @if ($index % 2) {
-                  <!-- unchecked -->
-                  <div
-                    style="width: 15px; height: 15px; border: 1px solid #ddd; margin: 0 auto;"
-                  ></div>
-                } @else {
-                  <!-- checked -->
-                  <div
-                    style="width: 15px; height: 15px; border: 1px solid #0075ff; background-color: #0075ff; margin: 0 auto; display: flex; align-items: center; justify-content: center;"
-                  >
-                    <div
-                      style="width: 8px; height: 4px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg); margin-top: -2px;"
-                    ></div>
-                  </div>
-                }
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
+      <invoice-item-qty-check-table [data]="invoiceData.items" />
 
       <div style="font-size: 11px; color: #999; margin-top: 50px;">
         {{ invoiceData.footerNote }}
