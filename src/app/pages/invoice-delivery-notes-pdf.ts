@@ -157,8 +157,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
               {{ item.quantity }}
             </td>
             <td style="padding: 12px 5px; text-align: center; font-size:13px;">
-              <!-- unchecked -->
               @if (i % 2) {
+                <!-- unchecked -->
                 <div
                   style="width: 15px; height: 15px; border: 1px solid #ddd; margin: 0 auto;"
                 ></div>
