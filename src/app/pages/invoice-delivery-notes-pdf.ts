@@ -153,11 +153,13 @@ export class InvoiceDeliveryNotesPDFComponent {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
         description: 'American honey (1 box X 15 bottle) (case)',
         quantity: 1,
+        isChecked: true,
       },
       {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
         description: 'American honey (1 box X 15 bottle) (case)',
         quantity: 1,
+        isChecked: true,
       },
       {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',

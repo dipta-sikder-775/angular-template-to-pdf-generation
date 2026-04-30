@@ -2,7 +2,11 @@
 <!-- <app-invoice-create-order-v2-pdf /> -->
 
 <!-- <app-invoice-supplier-notes-pdf/> -->
- <app-invoice-delivery-notes-pdf/>
+<hr style="margin: 20px 0" />
+
+<app-invoice-delivery-notes-pdf />
+
+<hr style="margin: 20px 0" />
 
 <button (click)="download()" [disabled]="isLoading">
   {{ isLoading ? "Generating PDF..." : "Download PDF" }}
