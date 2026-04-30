@@ -4,17 +4,19 @@ import generateHtmlToPDF, {
 } from '../utils/generate-html-to-pdf';
 import { InvoiceCreateOrderV2PDF } from './experimental-pages/invoice-create-order-v2-pdf';
 import { InvoiceCreateOrderPDFComponent } from './pages/invoice-create-order-pdf/invoice-create-order-pdf.component';
+import { InvoiceSupplierNotesPDF } from './pages/invoice-supplier-note-pdf';
+import { InvoiceDeliveryNotesPDFComponent } from "./pages/invoice-delivery-notes-pdf";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [InvoiceCreateOrderPDFComponent],
+  imports: [InvoiceCreateOrderPDFComponent, InvoiceSupplierNotesPDF, InvoiceDeliveryNotesPDFComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  @ViewChild(InvoiceCreateOrderV2PDF, { static: false })
-  invoiceComponent?: InvoiceCreateOrderV2PDF;
+  @ViewChild(InvoiceDeliveryNotesPDFComponent, { static: false })
+  invoiceComponent?: InvoiceDeliveryNotesPDFComponent;
   isLoading = false;
 
   async download() {

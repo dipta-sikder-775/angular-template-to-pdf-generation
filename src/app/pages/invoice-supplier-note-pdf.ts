@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-invoice-supplier-notes-pdf',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   imports: [CommonModule],
   template: `
     <div
+      #docRoot
       style="width: 210mm; min-height: 100mm; padding: 40px; margin: 20px auto; background: white; font-size: 11px; color: #333; box-sizing: border-box; line-height: 1.4; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
     >
       <table
@@ -166,6 +167,13 @@ import { Component } from '@angular/core';
   `,
 })
 export class InvoiceSupplierNotesPDF {
+  @ViewChild('docRoot', { static: false })
+  private docRootRef?: ElementRef<HTMLElement>;
+
+  get docRootNativeElement(): HTMLElement | undefined {
+    return this.docRootRef?.nativeElement;
+  }
+
   invoiceData = {
     invNo: 'INV-00086525316-7172-034',
     issueDate: '14-10-2025',

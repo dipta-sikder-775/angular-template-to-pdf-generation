@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-invoice-delivery-notes-pdf',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   imports: [CommonModule],
   template: `
     <div
+      #docRoot
       style="width: 210mm; min-height: 100mm; padding: 40px; margin: 20px auto; background: white; font-size: 11px; color: #333; box-sizing: border-box; line-height: 1.4; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
     >
       <!-- HEADER ROW: Invoice title/details | QR | Barcode | Logo -->
@@ -135,7 +136,7 @@ import { Component } from '@angular/core';
             </td>
           </tr>
           <tr
-            *ngFor="let item of invoiceData.items"
+            *ngFor="let item of invoiceData.items; let i = index"
             style="border-bottom: 1px solid #f9f9f9;"
           >
             <td style="padding: 12px 5px; font-size:13px;">
@@ -156,9 +157,21 @@ import { Component } from '@angular/core';
               {{ item.quantity }}
             </td>
             <td style="padding: 12px 5px; text-align: center; font-size:13px;">
-              <div
-                style="width: 15px; height: 15px; border: 1px solid #ddd; margin: 0 auto;"
-              ></div>
+              <!-- unchecked -->
+              @if (i % 2) {
+                <div
+                  style="width: 15px; height: 15px; border: 1px solid #ddd; margin: 0 auto;"
+                ></div>
+              } @else {
+                <!-- checked -->
+                <div
+                  style="width: 15px; height: 15px; border: 1px solid #0075ff; background-color: #0075ff; margin: 0 auto; display: flex; align-items: center; justify-content: center;"
+                >
+                  <div
+                    style="width: 8px; height: 4px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg); margin-top: -2px;"
+                  ></div>
+                </div>
+              }
             </td>
           </tr>
         </tbody>
@@ -170,7 +183,14 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class InvoiceDeliveryNotesPDF {
+export class InvoiceDeliveryNotesPDFComponent {
+  @ViewChild('docRoot', { static: false })
+  private docRootRef?: ElementRef<HTMLElement>;
+
+  get docRootNativeElement(): HTMLElement | undefined {
+    return this.docRootRef?.nativeElement;
+  }
+
   invoiceData = {
     invNo: 'INV-00086525316-7172-034',
     issueDate: '14-10-2025',

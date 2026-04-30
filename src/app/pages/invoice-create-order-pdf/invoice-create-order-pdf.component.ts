@@ -1,7 +1,4 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import generateHtmlToPDF, {
-  generatePDFFooter,
-} from '../../../utils/generate-html-to-pdf';
 import { InvoiceAddressColumnComponent } from '../../components/sales-invoice-pdf-related-components/invoice-address-column/invoice-address-column.component';
 import { InvoiceBarcodeComponent } from '../../components/sales-invoice-pdf-related-components/invoice-barcode/invoice-barcode.component';
 import { InvoiceBusinessLogoComponent } from '../../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.component';
@@ -32,50 +29,55 @@ import { InvoiceTaxAndTotalsComponent } from './invoice-tax-and-totals/invoice-t
   templateUrl: './invoice-create-order-pdf.component.html',
 })
 export class InvoiceCreateOrderPDFComponent {
-  @ViewChild('transactionPDFInvoiceContainer', { static: false })
-  invoiceElement!: ElementRef;
-  isLoading = false;
+  @ViewChild('docRoot', { static: false })
+  private docRootRef?: ElementRef<HTMLElement>;
 
-  // constructor(private pdfService: PdfExportService) {}
-
-  async download() {
-    try {
-      this.isLoading = true;
-      await generateHtmlToPDF({
-        src: this.invoiceElement.nativeElement,
-        fileName: 'MyInvoice.pdf',
-        configureHtmlOption: {
-          // y: -20,
-          callback: (pdf) => {
-            generatePDFFooter(pdf, [
-              {
-                text: 'All items are revertible until full paid',
-                align: 'left',
-                showOn: 'last',
-                fontSize: 8,
-                fontStyle: 'italic',
-                colorRGB: { r: 153, g: 153, b: 153 },
-              },
-              {
-                text: (currentPage, totalPages) =>
-                  `Page ${currentPage} of ${totalPages}`,
-                align: 'right',
-                showOn: 'all',
-                fontSize: 7,
-                colorRGB: { r: 51, g: 51, b: 51 },
-              },
-            ]);
-
-            pdf.save('MyInvoice.pdf');
-          },
-        },
-      });
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-    } finally {
-      this.isLoading = false;
-    }
+  get docRootNativeElement(): HTMLElement | undefined {
+    return this.docRootRef?.nativeElement;
   }
+
+  // isLoading = false;
+
+  // // constructor(private pdfService: PdfExportService) {}
+
+  // async download() {
+  //   try {
+  //     this.isLoading = true;
+  //     await generateHtmlToPDF({
+  //       src: this.invoiceElement.nativeElement,
+  //       fileName: 'MyInvoice.pdf',
+  //       configureHtmlOption: {
+  //         // y: -20,
+  //         callback: (pdf) => {
+  //           generatePDFFooter(pdf, [
+  //             {
+  //               text: 'All items are revertible until full paid',
+  //               align: 'left',
+  //               showOn: 'last',
+  //               fontSize: 8,
+  //               fontStyle: 'italic',
+  //               colorRGB: { r: 153, g: 153, b: 153 },
+  //             },
+  //             {
+  //               text: (currentPage, totalPages) =>
+  //                 `Page ${currentPage} of ${totalPages}`,
+  //               align: 'right',
+  //               showOn: 'all',
+  //               fontSize: 7,
+  //               colorRGB: { r: 51, g: 51, b: 51 },
+  //             },
+  //           ]);
+
+  //           pdf.save('MyInvoice.pdf');
+  //         },
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.error('Error generating PDF:', error);
+  //   } finally {
+  //     this.isLoading = false;
+  //   }
+  // }
 
   invoiceData: TransactionInvoiceCreateOrderPdfData = {
     // row 1: Invoice basic info start
