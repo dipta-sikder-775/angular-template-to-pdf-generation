@@ -79,21 +79,21 @@
   <!-- ORDER TYPE & AMOUNT DUE -->
   <invoice-order-details [orderDetails]="invoiceData.orderDetails" />
 
-  <transaction-pdf-invoice-items-table
+  <invoice-items-table
     [items]="invoiceData.items"
     [stockType]="invoiceData.stockType"
   />
 
-  <transaction-pdf-invoice-tax-and-totals
+  <invoice-tax-and-totals
     [taxDetails]="invoiceData.taxDetails"
-    [taxSummary]="invoiceData.taxSummary"
+    [priceTaxSummary]="invoiceData.priceTaxSummary"
   />
 
-  <transaction-pdf-invoice-instalment-breakdown
+  <invoice-instalment-breakdown
     [invoiceInstallmentTableData]="invoiceData.installments"
   />
 
-  <transaction-pdf-invoice-payment-details
+  <invoice-payment-details
     [bank]="invoiceData.bank"
     [footerNote]="invoiceData.footerNote"
   />

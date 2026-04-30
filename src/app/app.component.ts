@@ -8,7 +8,7 @@ import { InvoiceCreateOrderPDFComponent } from './pages/invoice-create-order-pdf
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [InvoiceCreateOrderV2PDF, InvoiceCreateOrderPDFComponent],
+  imports: [InvoiceCreateOrderPDFComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

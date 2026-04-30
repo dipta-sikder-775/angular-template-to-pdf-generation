@@ -45,16 +45,10 @@ export interface ITransactionInvoiceBankDetails {
   iban: string;
 }
 
-export interface ITaxSummaryRow {
+export interface IPriceTaxSummaryRow {
   label: string | number;
   value: string | number | null | undefined;
 }
-
-// export interface ITaxSummaryRow {
-//   subtotal: string | null | undefined;
-//   totalVat: string | null | undefined;
-//   totalAmount?: string | null | undefined;
-// }
 
 export interface TransactionInvoiceCreateOrderPdfData {
   // row 1: Invoice basic info start
@@ -96,10 +90,7 @@ export interface TransactionInvoiceCreateOrderPdfData {
   taxDetails?: ITransactionInvoiceTaxDetailsRow[] | null | undefined;
 
   // 5-2. tax summary
-  taxSummary?: ITaxSummaryRow[] | null | undefined;
-  // subtotal: string | number | null | undefined;
-  // totalVat: string | number | null | undefined;
-  // totalAmount?: string | number | null | undefined;
+  priceTaxSummary?: IPriceTaxSummaryRow[] | null | undefined;
 
   stockType: string;
   items: TTransactionInvoiceLineItem[];

@@ -1,4 +1,4 @@
-import { ITransactionInvoiceTaxDetailsRow } from '../../../pages/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.model';
+import { ITransactionInvoiceTaxDetailsRow } from '../../../pages/invoice-create-order-pdf/invoice-create-order-pdf.model';
 import {
   ICustomDynamicTableColumn,
   TSimpleStyle,

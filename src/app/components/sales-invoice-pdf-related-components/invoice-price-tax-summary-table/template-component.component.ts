@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ITaxSummaryRow } from '../../../pages/transection-invoice-create-order-pdf/transaction-invoice-create-order-pdf.model';
 import { ILoopData } from '../dynamic-custom-table/dynamic-custom-table.component.model';
+import { IPriceTaxSummaryRow } from '../../../pages/invoice-create-order-pdf/invoice-create-order-pdf.model';
 
 @Component({
   standalone: true,
@@ -29,8 +29,8 @@ import { ILoopData } from '../dynamic-custom-table/dynamic-custom-table.componen
 })
 export class TaxSummaryCellTemplateComponent {
   // These names MUST match the keys in the 'inputs' object above
-  @Input() row: ITaxSummaryRow | null | undefined;
-  @Input() data: ITaxSummaryRow[] | null | undefined;
+  @Input() row: IPriceTaxSummaryRow | null | undefined;
+  @Input() data: IPriceTaxSummaryRow[] | null | undefined;
   @Input() loop: ILoopData | null | undefined;
 
   watchInputs() {
