@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './invoice-address-column.component.scss',
 })
 export class InvoiceAddressColumnComponent {
-  @Input({ required: true }) title: string | number | null | undefined;
+  @Input({ required: false }) title: string | number | null | undefined;
   @Input({ required: false }) name: string | null | undefined;
   @Input({ required: true }) description:
     | (string | number)[]
@@ -17,4 +17,6 @@ export class InvoiceAddressColumnComponent {
     | undefined;
   @Input({ required: true }) isFirstItem: boolean | null | undefined;
   @Input({ required: true }) isLastItem: boolean | null | undefined;
+  @Input({ required: false }) width: string | undefined;
+  @Input({ required: false }) paddingRight: string | undefined;
 }

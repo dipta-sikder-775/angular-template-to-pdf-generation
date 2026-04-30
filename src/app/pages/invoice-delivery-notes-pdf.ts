@@ -1,10 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { InvoiceAddressColumnComponent } from '../components/sales-invoice-pdf-related-components/invoice-address-column/invoice-address-column.component';
+import { InvoiceBarcodeComponent } from '../components/sales-invoice-pdf-related-components/invoice-barcode/invoice-barcode.component';
+import { InvoiceBusinessLogoComponent } from '../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.component';
+import { InvoiceOrderDetailsComponent } from '../components/sales-invoice-pdf-related-components/invoice-order-details/invoice-order-details.component';
+import { InvoiceQrCodeComponent } from '../components/sales-invoice-pdf-related-components/invoice-qr-code/invoice-qr-code.component';
+import { InvoiceSummaryComponent } from '../components/sales-invoice-pdf-related-components/invoice-summary/invoice-summary.component';
 
 @Component({
   selector: 'app-invoice-delivery-notes-pdf',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    InvoiceSummaryComponent,
+    InvoiceQrCodeComponent,
+    InvoiceBarcodeComponent,
+    InvoiceBusinessLogoComponent,
+    InvoiceAddressColumnComponent,
+    InvoiceOrderDetailsComponent,
+  ],
   template: `
     <div
       #docRoot
@@ -15,49 +29,17 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
         style="width: 100%; border-collapse: collapse; margin-bottom: 15px; table-layout: fixed;"
       >
         <tr>
-          <td style="vertical-align: top; width: 45%;">
-            <h1
-              style="font-size: 20px; margin: 0 0 10px 0; color: #000; font-weight: 700;"
-            >
-              Invoice - Delivery Note
-            </h1>
-            <p style="margin: 2px 0; font-size: 12px; display:flex; gap:10px;">
-              <strong style="width:80px">INV No:</strong>
-              <span style="color: #333;">{{ invoiceData.invNo }}</span>
-            </p>
-            <p style="margin: 2px 0; font-size: 12px; display:flex; gap:10px;">
-              <strong style=" width:80px"> Issue Date</strong>
-              {{ invoiceData.issueDate }}
-            </p>
-            <p style="margin: 2px 0; font-size: 12px; display:flex; gap:10px;">
-              <strong style="width:80px">Delivery Date</strong>
-              {{ invoiceData.deliveryDate }}
-            </p>
-          </td>
+          <invoice-summary
+            [invoiceSummaryData]="invoiceData.invoiceSummaryData"
+          />
 
-          <td style="vertical-align: top; width: 20%;">
-            <img
-              [src]="invoiceData.qrCodeUrl"
-              alt="QR"
-              style="width: 70px; height: 70px;"
-            />
-          </td>
+          <invoice-qr-code [qrCodeUrl]="invoiceData.qrCodeUrl" />
 
-          <td style="vertical-align: top; width: 25%;">
-            <img
-              [src]="invoiceData.barcodeUrl"
-              alt="Barcode"
-              style="width: 140px; height: 35px;  "
-            />
-          </td>
+          <invoice-barcode [barcodeUrl]="invoiceData.barcodeUrl" />
 
-          <td style="vertical-align: top; width: 10%; text-align: right;">
-            <img
-              src="https://cdn.yoicons.com/8832SVdev/business/10/images/icon/10.png?t=1775659733109"
-              alt="VALT Logo"
-              style="width: 80px;"
-            />
-          </td>
+          <invoice-business-logo
+            [businessLogoData]="invoiceData.businessLogoData"
+          />
         </tr>
       </table>
 
@@ -66,50 +48,27 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
         style="width: 100%; border-collapse: collapse; margin-bottom: 20px; table-layout: fixed;"
       >
         <tr>
-          <td style="vertical-align: top; width: 35%; padding-right:20px">
-            <p style="margin: 0 0 4px 0; font-size: 13px;">
-              <strong>{{ invoiceData.supplier.name }}</strong>
-            </p>
-            <p
-              *ngFor="let line of invoiceData.supplier.address"
-              style="margin: 0; color: #555; font-size: 13px;"
-            >
-              {{ line }}
-            </p>
-          </td>
+          <invoice-address-column
+            [title]="invoiceData.supplier.name"
+            [description]="invoiceData.supplier.address"
+            [isFirstItem]="true"
+            [isLastItem]="false"
+            width="34%"
+          />
 
-          <td style="vertical-align: top; width: 35%;">
-            <p style="margin: 0 0 4px 0; font-size: 13px;">
-              <strong>Deliver To</strong>
-            </p>
-            <p style="margin: 0; font-weight: 600; font-size: 13px;">
-              {{ invoiceData.deliverTo.name }}
-            </p>
-            <p
-              *ngFor="let line of invoiceData.deliverTo.address"
-              style="margin: 0; color: #555; font-size: 13px;"
-            >
-              {{ line }}
-            </p>
-          </td>
+          <invoice-address-column
+            title="Deliver To"
+            [name]="invoiceData.deliverTo.name"
+            [description]="invoiceData.deliverTo.address"
+            [isFirstItem]="false"
+            [isLastItem]="true"
+            width="35%"
+          />
         </tr>
       </table>
 
       <!-- ORDER TYPE & AMOUNT DUE -->
-      <div style="margin-bottom: 15px;">
-        <p style="margin: 2px 0; font-size: 15px;">
-          <strong>Order Type</strong>
-          <span style="margin-left: 10px;"> {{ invoiceData.orderType }}</span>
-        </p>
-        <p style="margin: 2px 0;">
-          <strong>Amounts are:</strong> {{ invoiceData.amountStatus }}
-        </p>
-        <p
-          style="font-size: 22px; margin: 1px 0 0 0; font-weight: bold; color: #000;"
-        >
-          £{{ invoiceData.totalAmount }} Due
-        </p>
-      </div>
+      <invoice-order-details [orderDetails]="invoiceData.orderDetails" />
 
       <table style="width: 100%; border-collapse: collapse;">
         <thead>
@@ -129,51 +88,58 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
             </th>
           </tr>
         </thead>
+
         <tbody>
           <tr>
             <td colspan="3" style="padding: 10px 5px 5px 5px; font-size:13px;">
               <strong>Groceries :</strong>
             </td>
           </tr>
-          <tr
-            *ngFor="let item of invoiceData.items; let i = index"
-            style="border-bottom: 1px solid #f9f9f9;"
-          >
-            <td style="padding: 12px 5px; font-size:13px;">
-              <div
-                style="font-size: 13px; display:flex; gap:8px; align-items:center"
-              >
-                <img
-                  *ngIf="item?.img"
-                  style="height:30px;  border-radius:4px"
-                  [src]="item?.img"
-                  alt=""
-                />
-                {{ item.description }}
-              </div>
-            </td>
 
-            <td style="padding: 12px 5px; text-align: center; font-size:13px;">
-              {{ item.quantity }}
-            </td>
-            <td style="padding: 12px 5px; text-align: center; font-size:13px;">
-              @if (i % 2) {
-                <!-- unchecked -->
+          <!-- *ngFor="let item of invoiceData.items; let i = index" -->
+          @for (item of invoiceData.items; track item) {
+            <tr style="border-bottom: 1px solid #f9f9f9;">
+              <td style="padding: 12px 5px; font-size:13px;">
                 <div
-                  style="width: 15px; height: 15px; border: 1px solid #ddd; margin: 0 auto;"
-                ></div>
-              } @else {
-                <!-- checked -->
-                <div
-                  style="width: 15px; height: 15px; border: 1px solid #0075ff; background-color: #0075ff; margin: 0 auto; display: flex; align-items: center; justify-content: center;"
+                  style="font-size: 13px; display:flex; gap:8px; align-items:center"
                 >
-                  <div
-                    style="width: 8px; height: 4px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg); margin-top: -2px;"
-                  ></div>
+                  <img
+                    *ngIf="item?.img"
+                    style="height:30px;  border-radius:4px"
+                    [src]="item?.img"
+                    alt=""
+                  />
+                  {{ item.description }}
                 </div>
-              }
-            </td>
-          </tr>
+              </td>
+
+              <td
+                style="padding: 12px 5px; text-align: center; font-size:13px;"
+              >
+                {{ item.quantity }}
+              </td>
+
+              <td
+                style="padding: 12px 5px; text-align: center; font-size:13px;"
+              >
+                @if ($index % 2) {
+                  <!-- unchecked -->
+                  <div
+                    style="width: 15px; height: 15px; border: 1px solid #ddd; margin: 0 auto;"
+                  ></div>
+                } @else {
+                  <!-- checked -->
+                  <div
+                    style="width: 15px; height: 15px; border: 1px solid #0075ff; background-color: #0075ff; margin: 0 auto; display: flex; align-items: center; justify-content: center;"
+                  >
+                    <div
+                      style="width: 8px; height: 4px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg); margin-top: -2px;"
+                    ></div>
+                  </div>
+                }
+              </td>
+            </tr>
+          }
         </tbody>
       </table>
 
@@ -192,14 +158,43 @@ export class InvoiceDeliveryNotesPDFComponent {
   }
 
   invoiceData = {
-    invNo: 'INV-00086525316-7172-034',
-    issueDate: '14-10-2025',
-    deliveryDate: '14-10-2025',
-    orderType: 'Delivery',
-    amountStatus: 'Tax Exclusive',
-    totalAmount: '5.99',
-    qrCodeUrl: 'assets/img/logo/dummyQR.png',
-    barcodeUrl: 'assets/img/logo/dummyBARCODE.jpg',
+    invoiceSummaryData: {
+      title: 'Invoice - Delivery Note',
+      data: [
+        { label: 'INV No:', value: 'INV-00086525316-7172-034' },
+        { label: 'Issue Date', value: '14-10-2025' },
+        { label: 'Issue Date', value: '14-10-2025' },
+      ],
+    },
+
+    qrCodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    barcodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+
+    businessLogoData: {
+      businessName: 'business',
+      businessId: 10,
+    },
+
+    orderDetails: [
+      {
+        label: 'Order Type',
+        value: 'Delivery',
+        size: 'medium',
+      },
+      {
+        label: 'Amounts are',
+        value: 'Tax Exclusive',
+        size: 'small',
+      },
+      {
+        label: '£5.99',
+        value: 'Due',
+        size: 'large',
+      },
+    ],
+
     supplier: {
       name: 'YO SUPPLIER 2',
       address: [
@@ -221,6 +216,7 @@ export class InvoiceDeliveryNotesPDFComponent {
         'United Kingdom',
       ],
     },
+
     items: [
       {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
@@ -243,6 +239,7 @@ export class InvoiceDeliveryNotesPDFComponent {
         quantity: 1,
       },
     ],
+
     footerNote:
       'Company Registration No: 56766666520. Registered Office: London Road, IsleofLewis, United Kingdom',
   };

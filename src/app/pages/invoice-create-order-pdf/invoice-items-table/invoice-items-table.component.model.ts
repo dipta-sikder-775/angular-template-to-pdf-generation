@@ -6,31 +6,27 @@ import { TTransactionInvoiceLineItem } from '../invoice-create-order-pdf.model';
 import { ItemDescriptionCellComponent } from './item-description-cell.component';
 
 export const ITEMS_TABLE_STYLES: {
-  // tableStyle: TSimpleStyle;
-  // tableHeadRowStyle: TSimpleStyle;
-  // tableBodyRowStyle: TSimpleStyle;
+  tableBodyRowStyle: TSimpleStyle;
   tableBodyRowTdStyle: TSimpleStyle;
 } = {
-  // tableStyle: {
-  //   width: '100%',
-  //   borderCollapse: 'collapse',
-  //   marginBottom: '25px',
-  // },
-  // tableHeadRowStyle: {
-  //   borderBottom: '1px solid #333',
-  //   textAlign: 'left',
-  //   color: '#333',
-  // },
-  // tableBodyRowStyle: {
-  //   fontSize: '13px',
-  //   borderBottom: '1px solid #eee',
-  // },
   tableBodyRowTdStyle: {
     padding: '8px 5px',
     textAlign: 'right',
     fontSize: '12px',
   },
+  tableBodyRowStyle: {
+    padding: '8px 5px',
+    textAlign: 'right',
+    width: '80px',
+    fontWeight: '700',
+    fontSize: '12px',
+  },
 };
+
+const skipLabelRowRendering: ICustomDynamicTableColumn<TTransactionInvoiceLineItem>['body']['skipRendering'] =
+  ({ row }) => {
+    return row?.type === 'label';
+  };
 
 export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceLineItem>[] =
   [
@@ -67,7 +63,7 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
               type: 'doNotRenderComponent',
             };
           }
-          // return null;
+
           return {
             type: 'renderComponent',
             result: ItemDescriptionCellComponent,
@@ -83,7 +79,6 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
               backgroundColor: '#fafafa',
             };
           }
-          // style="padding: 10px 5px 4px 5px; font-weight: bold; font-size: 12px"
           return {
             padding: '8px 5px',
           };
@@ -94,22 +89,13 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
           }
           return 1;
         },
-        // skipRendering({ row }) {
-        //   return row?.type === 'data';
-        // },
       },
     },
     {
       header: {
         headerCellContent: 'Quantity',
         key: crypto.randomUUID(),
-        style: {
-          padding: '8px 5px',
-          textAlign: 'right',
-          width: '80px',
-          fontWeight: '700',
-          fontSize: '12px',
-        },
+        style: ITEMS_TABLE_STYLES.tableBodyRowStyle,
       },
       body: {
         bodyCellContent: ({ row }) => {
@@ -120,22 +106,14 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
-        skipRendering({ row }) {
-          return row?.type === 'label';
-        },
+        skipRendering: skipLabelRowRendering,
       },
     },
     {
       header: {
         headerCellContent: 'Unit Price',
         key: crypto.randomUUID(),
-        style: {
-          padding: '8px 5px',
-          textAlign: 'right',
-          width: '80px',
-          fontWeight: '700',
-          fontSize: '12px',
-        },
+        style: ITEMS_TABLE_STYLES.tableBodyRowStyle,
       },
       body: {
         bodyCellContent: ({ row }) => {
@@ -146,22 +124,14 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
-        skipRendering({ row }) {
-          return row?.type === 'label';
-        },
+        skipRendering: skipLabelRowRendering,
       },
     },
     {
       header: {
         headerCellContent: 'VAT',
         key: crypto.randomUUID(),
-        style: {
-          padding: '8px 5px',
-          textAlign: 'right',
-          width: '80px',
-          fontWeight: '700',
-          fontSize: '12px',
-        },
+        style: ITEMS_TABLE_STYLES.tableBodyRowStyle,
       },
       body: {
         bodyCellContent: ({ row }) => {
@@ -172,22 +142,14 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
-        skipRendering({ row }) {
-          return row?.type === 'label';
-        },
+        skipRendering: skipLabelRowRendering,
       },
     },
     {
       header: {
         headerCellContent: 'Amount GBP',
         key: crypto.randomUUID(),
-        style: {
-          padding: '8px 5px',
-          textAlign: 'right',
-          width: '80px',
-          fontWeight: '700',
-          fontSize: '12px',
-        },
+        style: ITEMS_TABLE_STYLES.tableBodyRowStyle,
       },
       body: {
         bodyCellContent: ({ row }) => {
@@ -198,11 +160,7 @@ export const ITEMS_TABLE_COLUMNS: ICustomDynamicTableColumn<TTransactionInvoiceL
         },
         key: crypto.randomUUID(),
         style: ITEMS_TABLE_STYLES.tableBodyRowTdStyle,
-        skipRendering({ row }) {
-          return row?.type === 'label';
-        },
+        skipRendering: skipLabelRowRendering,
       },
     },
   ];
-
-// export const SAMPLE_ITEMS_TABLE_DATA: TTransactionInvoiceLineItem[] = []
