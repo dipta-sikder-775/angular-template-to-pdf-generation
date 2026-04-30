@@ -8,6 +8,10 @@
 
 <hr style="margin: 20px 0" />
 
+<app-invoice-supplier-notes-pdf />
+
+<hr style="margin: 20px 0" />
+
 <button (click)="download()" [disabled]="isLoading">
   {{ isLoading ? "Generating PDF..." : "Download PDF" }}
 </button>

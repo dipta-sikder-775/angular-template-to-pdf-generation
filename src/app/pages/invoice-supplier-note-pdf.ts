@@ -1,10 +1,22 @@
-import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { InvoiceAddressColumnComponent } from '../components/sales-invoice-pdf-related-components/invoice-address-column/invoice-address-column.component';
+import { InvoiceBarcodeComponent } from '../components/sales-invoice-pdf-related-components/invoice-barcode/invoice-barcode.component';
+import { InvoiceBusinessLogoComponent } from '../components/sales-invoice-pdf-related-components/invoice-business-logo/invoice-business-logo.component';
+import { InvoiceItemQtyCheckTableComponent } from '../components/sales-invoice-pdf-related-components/invoice-item-qty-check-table';
+import { InvoiceQrCodeComponent } from '../components/sales-invoice-pdf-related-components/invoice-qr-code/invoice-qr-code.component';
+import { InvoiceSummaryComponent } from '../components/sales-invoice-pdf-related-components/invoice-summary/invoice-summary.component';
 
 @Component({
   selector: 'app-invoice-supplier-notes-pdf',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    InvoiceSummaryComponent,
+    InvoiceQrCodeComponent,
+    InvoiceBarcodeComponent,
+    InvoiceBusinessLogoComponent,
+    InvoiceAddressColumnComponent,
+    InvoiceItemQtyCheckTableComponent,
+  ],
   template: `
     <div
       #docRoot
@@ -14,7 +26,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
         style="width: 100%; border-collapse: collapse; margin-bottom: 15px; table-layout: fixed;"
       >
         <tr>
-          <td style="vertical-align: top; width: 45%;">
+          <!-- summary -->
+          <!-- <td style="vertical-align: top; width: 45%;">
             <h1
               style="font-size: 20px; margin: 0 0 10px 0; color: #000; font-weight: 700;"
             >
@@ -32,31 +45,42 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
               <strong style="width:80px">Delivery Date</strong>
               {{ invoiceData.deliveryDate }}
             </p>
-          </td>
+          </td> -->
+          <invoice-summary
+            [invoiceSummaryData]="invoiceData.invoiceSummaryData"
+          />
 
-          <td style="vertical-align: top; width: 20%;">
+          <!-- qr -->
+          <!-- <td style="vertical-align: top; width: 20%;">
             <img
               [src]="invoiceData.qrCodeUrl"
               alt="QR"
               style="width: 70px; height: 70px;"
             />
-          </td>
+          </td> -->
+          <invoice-qr-code [qrCodeUrl]="invoiceData.qrCodeUrl" />
 
-          <td style="vertical-align: top; width: 25%;">
+          <!-- barcode -->
+          <!-- <td style="vertical-align: top; width: 25%;">
             <img
               [src]="invoiceData.barcodeUrl"
               alt="Barcode"
               style="width: 140px; height: 35px;  "
             />
-          </td>
+          </td> -->
+          <invoice-barcode [barcodeUrl]="invoiceData.barcodeUrl" />
 
-          <td style="vertical-align: top; width: 10%; text-align: right;">
+          <!-- logo -->
+          <!-- <td style="vertical-align: top; width: 10%; text-align: right;">
             <img
               src="https://cdn.yoicons.com/8832SVdev/business/10/images/icon/10.png?t=1775659733109"
               alt="VALT Logo"
               style="width: 80px;"
             />
-          </td>
+          </td> -->
+          <invoice-business-logo
+            [businessLogoData]="invoiceData.businessLogoData"
+          />
         </tr>
       </table>
 
@@ -65,7 +89,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
         style="width: 100%; border-collapse: collapse; margin-bottom: 20px; table-layout: fixed;"
       >
         <tr>
-          <td style="vertical-align: top; width: 34%; padding-right:20px">
+          <!-- supplier -->
+          <!-- <td style="vertical-align: top; width: 34%; padding-right:20px">
             <p style="margin: 0 0 4px 0; font-size: 13px;">
               <strong>{{ invoiceData.supplier.name }}</strong>
             </p>
@@ -75,8 +100,16 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
             >
               {{ line }}
             </p>
-          </td>
-          <td style="vertical-align: top; width: 33%;padding-right:20px">
+          </td> -->
+          <invoice-address-column
+            [title]="invoiceData.supplier.title"
+            [description]="invoiceData.supplier.address"
+            [isFirstItem]="true"
+            [isLastItem]="false"
+          />
+
+          <!-- bill to -->
+          <!-- <td style="vertical-align: top; width: 33%;padding-right:20px">
             <p style="margin: 0 0 4px 0; font-size: 13px;">
               <strong>Bill To</strong>
             </p>
@@ -89,8 +122,17 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
             >
               {{ line }}
             </p>
-          </td>
-          <td style="vertical-align: top; width: 33%;">
+          </td> -->
+          <invoice-address-column
+            title="Bill To"
+            [name]="invoiceData.billTo.name"
+            [description]="invoiceData.billTo.address"
+            [isFirstItem]="false"
+            [isLastItem]="false"
+          />
+
+          <!-- deliver to -->
+          <!-- <td style="vertical-align: top; width: 33%;">
             <p style="margin: 0 0 4px 0; font-size: 13px;">
               <strong>Deliver To</strong>
             </p>
@@ -103,11 +145,19 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
             >
               {{ line }}
             </p>
-          </td>
+          </td> -->
+          <invoice-address-column
+            title="Deliver To"
+            [name]="invoiceData.deliverTo.name"
+            [description]="invoiceData.deliverTo.address"
+            [isFirstItem]="false"
+            [isLastItem]="true"
+          />
         </tr>
       </table>
 
-      <table style="width: 100%; border-collapse: collapse;">
+      <!-- ITEMS qty check -->
+      <!-- <table style="width: 100%; border-collapse: collapse;">
         <thead>
           <tr style="border-bottom: 1px solid #ddd; text-align: left; ">
             <th style="padding: 10px 5px; font-weight: 700; font-size: 12px;">
@@ -158,7 +208,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+      <invoice-item-qty-check-table [data]="invoiceData.items" />
 
       <div style="font-size: 11px; color: #999; margin-top: 50px;">
         {{ invoiceData.footerNote }}
@@ -175,16 +226,34 @@ export class InvoiceSupplierNotesPDF {
   }
 
   invoiceData = {
-    invNo: 'INV-00086525316-7172-034',
-    issueDate: '14-10-2025',
-    deliveryDate: '14-10-2025',
-    orderType: 'Delivery',
-    amountStatus: 'Tax Exclusive',
-    totalAmount: '5.99',
-    qrCodeUrl: 'assets/img/logo/dummyQR.png',
-    barcodeUrl: 'assets/img/logo/dummyBARCODE.jpg',
+    // invNo: 'INV-00086525316-7172-034',
+    // issueDate: '14-10-2025',
+    // deliveryDate: '14-10-2025',
+    // orderType: 'Delivery',
+    // amountStatus: 'Tax Exclusive',
+    // totalAmount: '5.99',
+
+    invoiceSummaryData: {
+      title: 'Invoice - Supplier Note',
+      data: [
+        { label: 'INV No:', value: 'INV-00086525316-7172-034' },
+        { label: 'Issue Date', value: '14-10-2025' },
+        { label: 'Issue Date', value: '14-10-2025' },
+      ],
+    },
+
+    qrCodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    barcodeUrl:
+      'https://images.unsplash.com/photo-1776088066852-33ac3d31dffd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+
+    businessLogoData: {
+      businessName: 'business',
+      businessId: 10,
+    },
+
     supplier: {
-      name: 'YO SUPPLIER 2',
+      title: 'YO SUPPLIER 2',
       address: [
         'E-Spoll, Francis Street',
         'IsleofLewis',
@@ -215,11 +284,13 @@ export class InvoiceSupplierNotesPDF {
         'United Kingdom',
       ],
     },
+
     items: [
       {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
         description: 'American honey (1 box X 15 bottle) (case)',
         quantity: 1,
+        isChecked: true,
       },
       {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
@@ -230,6 +301,7 @@ export class InvoiceSupplierNotesPDF {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
         description: 'American honey (3 box X 15 bottle) (case)',
         quantity: 100,
+        isChecked: true,
       },
       {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
@@ -245,8 +317,10 @@ export class InvoiceSupplierNotesPDF {
         img: 'https://cdn.yoicons.com/81t7ME5NU5kt88/business/1101/images/6803e98ae8366.jpeg',
         description: 'American honey (100 box X 15 bottle) (case)',
         quantity: 8000,
+        isChecked: true,
       },
     ],
+
     footerNote:
       'Company Registration No: 56766666520. Registered Office: London Road, IsleofLewis, United Kingdom',
   };

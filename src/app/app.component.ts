@@ -2,15 +2,18 @@ import { Component, ViewChild } from '@angular/core';
 import generateHtmlToPDF, {
   generatePDFFooter,
 } from '../utils/generate-html-to-pdf';
-import { InvoiceCreateOrderV2PDF } from './experimental-pages/invoice-create-order-v2-pdf';
 import { InvoiceCreateOrderPDFComponent } from './pages/invoice-create-order-pdf/invoice-create-order-pdf.component';
+import { InvoiceDeliveryNotesPDFComponent } from './pages/invoice-delivery-notes-pdf';
 import { InvoiceSupplierNotesPDF } from './pages/invoice-supplier-note-pdf';
-import { InvoiceDeliveryNotesPDFComponent } from "./pages/invoice-delivery-notes-pdf";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [InvoiceCreateOrderPDFComponent, InvoiceSupplierNotesPDF, InvoiceDeliveryNotesPDFComponent],
+  imports: [
+    InvoiceCreateOrderPDFComponent,
+    InvoiceSupplierNotesPDF,
+    InvoiceDeliveryNotesPDFComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
